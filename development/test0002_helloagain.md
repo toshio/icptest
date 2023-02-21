@@ -1,8 +1,15 @@
 # Hello, again
 
-今回はスクラッチでビルドしてみることにしましょう。
+[前回](./test0001_hello)はdfx newコマンドを使ってプログラムを生成したけれども、出力されるファイルが多すぎて分かりづらいので、スクラッチからビルドしてみることにしましょう。
+
+本ドキュメントではBackendを中心に解説しますのでFrontendは用意しません。
 
 ## 1. プロジェクトの作成
+
+まずはRustの一般的なライブラリプロジェクトを作成します。
+
+「test0002_helloagain」はプロジェクト名ですので、任意に設定して構いません。
+
 
 ```
 $ cargo new test0002_helloagain --lib
@@ -65,7 +72,7 @@ crate-type = ["cdylib"]
 #### b. create-type追加
 
 ```bash
-$ cargo add  candid ic-cdk ic-cdk-macros
+$ cargo add candid ic-cdk ic-cdk-macros
 ```
 ### (4) Cargo.lock作成
 
@@ -84,7 +91,6 @@ $ cargo generate-lockfile
 fn greet(name: String) -> String {
     format!("Hello, {}!", name)
 }
-
 ```
 
 ## 2. ビルド
