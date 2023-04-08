@@ -10,7 +10,6 @@
 
 「test0002_helloagain」はプロジェクト名ですので、任意に設定して構いません。
 
-
 ```
 $ cargo new test0002_helloagain --lib
 $ cd test0002_helloagain
@@ -19,6 +18,8 @@ $ cd test0002_helloagain
 ## 2. プロジェクト資材準備
 
 ### (1) dfx.json
+
+以下のようなdfx.jsonを用意してみましょう。
 
 ```dfx.json
 {
@@ -56,8 +57,6 @@ name = "test0002_helloagain"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 ```
 
@@ -76,7 +75,7 @@ $ cargo add candid ic-cdk ic-cdk-macros
 ```
 ### (4) Cargo.lock作成
 
-一般にcargo buildを実行すればCargo.lockは生成される。一方、後述のdfx buildコマンド (dfx deploy)では、内部的にcargo buildコマンドを「--locked」オプションで実行するため、事前にCargo.lockファイルを用意しておく必要がある。
+一般にcargo buildを実行すればCargo.lockは生成されます。一方、後述のdfx buildコマンド (dfx deploy)では、内部的にcargo buildコマンドを「--locked」オプションで実行しているようなので、事前にCargo.lockファイルを用意しておく必要があります。
 
 ```bash
 $ cargo generate-lockfile
@@ -95,24 +94,61 @@ fn greet(name: String) -> String {
 
 ## 2. ビルド
 
+DappsをビルドしてローカルPC上にCanisterに配置する手順を以下に示します。
+
+### (1) サービス起動
+
+
+まずは、ローカルPC上にCanister実行環境を起動します。`dfx start`コマンドで行います。以下に実行例を示します。
+
 ```
 $ dfx start --clean --background
 ```
+起動オプションの詳細は[公式ドキュメント](https://internetcomputer.org/docs/current/references/cli-reference/dfx-start)を参考にするとよいでしょう。
 
-## (1) Canister作成
+`--clean`オプションをつけると、起動時にCanisterを初期化します。初回起動、もしくは`--clean`でサービスを起動した時点ではCanisterは一つも登録されていません。
+
+`--background`オプションをつけるとコマンドが復帰し、サービスがバックグラウンドで起動されます。起動したサービスは、`dfx stop`コマンドで停止できます。
+
+### (2) Canister作成
+
+作成したDappを配備先のCanisterを作成します。
 
 ```
 $ dfx canister create helloagain
 ```
 
-## (2) ビルド
+Canisterが一つも登録されていない状況から本コマンドを実行した場合、作成するCanisterのほかに、Wallet Canisterが作成されます。Internet Computerでは Dappsを実行させるための Cycle と呼ばれる燃料に相当するものが必要です。
+
+本番環境では ICPトークンを Cycle に変換でき、Dappを実行させるコストがかかります。一方、ローカル環境の場合にも、コストはかかりませんが Cycle の仕組みがあり、作成されたWallet Canisterで管理されています。
+### (3) ビルド
+
+Canisterに配備するwasmモジュールをビルドします。
 
 ```
 $ dfx build
 ```
 
-### (3) 配備
+`target/wasm32-unknown-unknown/release/`ディレクトリにwasmモジュールが生成され、Canister向けに最適化されたモジュールが、`./.dfx/local/canisters/<Canister名>/<canister名>.wasm`に格納されます。
+
+### (4) 配備
 
 ```
 $ dfx deploy
 ```
+
+簡易UIのCanisterも用意されます。このCanisterを使うことで、WebページからDappsへ簡易のリクエストを発行できます。
+
+### 補足
+
+なお、手順(2)～(3)は、`dfx deploy`コマンドを実行する過程で必要に応じて実行されます。説明のため記載しましたが、実際の作業では省略して構いません。
+
+## まとめ
+
+
+
+![](../.gitbook/assets/test0002_helloagain_01_relation.drawio.png)
+
+||||
+|Canister Name|||
+||
