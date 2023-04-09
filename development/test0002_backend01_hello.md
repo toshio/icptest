@@ -1,18 +1,27 @@
-# Hello, again
+# Backend: Hello
 
-[前回](./test0001_hello)はdfx newコマンドを使ってプログラムを生成したけれども、出力されるファイルが多すぎて分かりづらいので、スクラッチからビルドしてみることにしましょう。
+[前回](./test0001_template)は`dfx new`コマンドを使ってプログラムを生成したけれども、出力されるファイルが多すぎて分かりづらいと思います。
 
-本ドキュメントではBackendを中心に解説しますのでFrontendは用意しません。
+そのため、テンプレート生成を使用せずに、スクラッチからビルドしてみることにしましょう。
+
+本ドキュメントではBackendを中心に解説しますので、ここではFrontendは用意しません。
+
+以下のような構成で作成しますので、実際のプロジェクトでは変更してください。
+
+|項目|値|
+|:----|:-----|
+|Project Name|icptest|
+|Canister Name|backend|
 
 ## 1. プロジェクトの作成
 
 まずはRustの一般的なライブラリプロジェクトを作成します。
 
-「test0002_helloagain」はプロジェクト名ですので、任意に設定して構いません。
+「icptest」はプロジェクト名ですので、任意に設定して構いません。
 
 ```
-$ cargo new test0002_helloagain --lib
-$ cd test0002_helloagain
+$ cargo new icptest --lib
+$ cd icptest
 ```
 
 ## 2. プロジェクト資材準備
@@ -24,9 +33,9 @@ $ cd test0002_helloagain
 ```dfx.json
 {
   "canisters": {
-    "helloagain": {
-      "candid": "./helloagain.did",
-      "package": "test0002_helloagain",
+    "backend": {
+      "candid": "./backend.did",
+      "package": "icptest",
       "type": "rust"
     }
   },
@@ -42,7 +51,7 @@ $ cd test0002_helloagain
 
 ### (2) didファイルの作成
 
-###### helloagain.did
+###### backend.did
 
 ```
 service : {
@@ -53,7 +62,7 @@ service : {
 
 ```
 [package]
-name = "test0002_helloagain"
+name = "icptest"
 version = "0.1.0"
 edition = "2021"
 
@@ -62,20 +71,21 @@ edition = "2021"
 
 #### a. create-type追加
 
-ライブラリセクションを追加するとよいでしょうか。cdylib は最終成果物の .wasm ファイル（＝動的ライブラリ）を
+ライブラリセクションを追加して、crate-typeにcdylibを指定します。cdylib を指定することで最終成果物の .wasm ファイルを動的ライブラリにします。
 
 ```
 [lib]
 crate-type = ["cdylib"]
 ```
-#### b. create-type追加
+#### b. dependencies追加
 
 ```bash
 $ cargo add candid ic-cdk ic-cdk-macros
 ```
+
 ### (4) Cargo.lock作成
 
-一般にcargo buildを実行すればCargo.lockは生成されます。一方、後述のdfx buildコマンド (dfx deploy)では、内部的にcargo buildコマンドを「--locked」オプションで実行しているようなので、事前にCargo.lockファイルを用意しておく必要があります。
+一般にcargo buildを実行すればCargo.lockは生成されます。しかしながら、後述のdfx buildコマンド (dfx deploy)では、内部的にcargo buildコマンドを「--locked」オプションで実行しているようですので、事前にCargo.lockファイルを用意しておく必要があります。
 
 ```bash
 $ cargo generate-lockfile
@@ -98,12 +108,12 @@ DappsをビルドしてローカルPC上にCanisterに配置する手順を以�
 
 ### (1) サービス起動
 
-
 まずは、ローカルPC上にCanister実行環境を起動します。`dfx start`コマンドで行います。以下に実行例を示します。
 
-```
+```bash
 $ dfx start --clean --background
 ```
+
 起動オプションの詳細は[公式ドキュメント](https://internetcomputer.org/docs/current/references/cli-reference/dfx-start)を参考にするとよいでしょう。
 
 `--clean`オプションをつけると、起動時にCanisterを初期化します。初回起動、もしくは`--clean`でサービスを起動した時点ではCanisterは一つも登録されていません。
@@ -114,18 +124,18 @@ $ dfx start --clean --background
 
 作成したDappを配備先のCanisterを作成します。
 
-```
-$ dfx canister create helloagain
+```bash
+$ dfx canister create backend
 ```
 
-Canisterが一つも登録されていない状況から本コマンドを実行した場合、作成するCanisterのほかに、Wallet Canisterが作成されます。Internet Computerでは Dappsを実行させるための Cycle と呼ばれる燃料に相当するものが必要です。
+Canisterが一つも登録されていない状況から本コマンドを実行した場合、作成するCanisterのほかに、Wallet Canisterが作成されます。Internet ComputerではDappsを実行させるためのCycleと呼ばれる燃料に相当するものが必要です。
 
-本番環境では ICPトークンを Cycle に変換でき、Dappを実行させるコストがかかります。一方、ローカル環境の場合にも、コストはかかりませんが Cycle の仕組みがあり、作成されたWallet Canisterで管理されています。
+本番環境では ICPトークンをCycleに変換してDappを実行します。ローカル環境の場合には、コストはかかりませんが Cycle の仕組みがあり、作成されたWallet Canisterで管理されています。
 ### (3) ビルド
 
 Canisterに配備するwasmモジュールをビルドします。
 
-```
+```bash
 $ dfx build
 ```
 
@@ -145,10 +155,6 @@ $ dfx deploy
 
 ## まとめ
 
+各ファイルと定数の関係を以下に示します。
 
-
-![](../.gitbook/assets/test0002_helloagain_01_relation.drawio.png)
-
-||||
-|Canister Name|||
-||
+![](../.gitbook/assets/icptest_01_relation.drawio.png)

@@ -1,8 +1,8 @@
 {
   "canisters": {
-    "helloagain": {
-      "candid": "./helloagain.did",
-      "package": "test0002_helloagain",
+    "backend": {
+      "candid": "./backend.did",
+      "package": "icptest",
       "type": "rust"
     }
   },
