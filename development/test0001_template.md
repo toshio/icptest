@@ -1,4 +1,4 @@
-# Hello
+# テンプレート生成
 
 まずはじめに、最もシンプルなHelloを返すDappsを開発してみます。
 
@@ -117,7 +117,6 @@ service : {
 ##### src/icptest_backend/Cargo.toml
 
 ```
-[package]
 [package]
 name = "icptest_backend"
 version = "0.1.0"
