@@ -1,4 +1,4 @@
-# Backend: Hello
+# Backend01: Hello
 
 [前回](./test0001_template)は`dfx new`コマンドを使ってプログラムを生成したけれども、出力されるファイルが多すぎて分かりづらいと思います。
 
