@@ -157,4 +157,4 @@ $ dfx deploy
 
 各ファイルと定数の関係を以下に示します。
 
-![](../.gitbook/assets/icptest_01_relation.drawio.png)
+![](../.gitbook/assets/development/test0002_backend01_hello/01_relation.drawio.png)

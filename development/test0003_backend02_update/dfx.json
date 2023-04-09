@@ -1,8 +1,8 @@
 {
   "canisters": {
-    "update": {
-      "candid": "./canister.did",
-      "package": "test0003_update",
+    "backend": {
+      "candid": "./backend.did",
+      "package": "icptest",
       "type": "rust"
     }
   },

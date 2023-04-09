@@ -26,9 +26,9 @@ https://internetcomputer.org/docs/current/developer-docs/backend/rust/rust-profi
 ```json
 {
   "canisters": {
-    "update": {
-      "candid": "./candid.did",
-      "package": "test0003_update",
+    "backend": {
+      "candid": "./backend.did",
+      "package": "icptest",
       "type": "rust"
     }
   },
@@ -42,7 +42,7 @@ https://internetcomputer.org/docs/current/developer-docs/backend/rust/rust-profi
 }
 ```
 
-###### canister.did
+###### backend.did
 
 set()とget()の2つのI/Fを用意することにしました。set()の引数は文字列、get()の戻り値は文字列です。更新を伴わない参照系のget()には `query` を指定すると良いでしょう。
 
@@ -59,7 +59,7 @@ service : {
 
 ```
 [package]
-name = "test0003_update"
+name = "icptest"
 version = "0.1.0"
 edition = "2021"
 
@@ -68,8 +68,8 @@ crate-type = ["cdylib"]
 
 [dependencies]
 candid = "0.8.4"
-ic-cdk = "0.7.0"
-ic-cdk-macros = "0.6.8"
+ic-cdk = "0.7.4"
+ic-cdk-macros = "0.6.10"
 ```
 
 ##### src/lib.rs
@@ -98,17 +98,21 @@ fn get() -> String {
 }
 ```
 
-### 解説
+## 実行例
 
-#### (1) set()関数
+![](../.gitbook/assets/development/test0003_backend02_update/01_update.png)
+
+## 解説
+
+### (1) set()関数
 
 サンプルプログラム内で定義している`set()`関数は、更新系処理となるため、Outer attributeに`ic_cdk_macros::update`を指定します。
 
-#### (2) get()関数
+### (2) get()関数
 
 サンプルプログラム内で定義した`set()`関数は、get()関数は、更新系処理となるため、Outer attributeに`ic_cdk_macros::query`を指定します。
 
-#### (3) thread_local
+### (3) thread_local
 
 Canisterは、
 
