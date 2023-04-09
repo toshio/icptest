@@ -23,7 +23,7 @@ dfx startコマンドで、ローカルPC環境で動作するCanisterを起動�
 
 ```bash
 $ dfx start --clean --background
-Running dfx start for version 0.12.1
+Running dfx start for version 0.13.1
 Using the default definition for the 'local' shared network because /home/toshio/.config/dfx/networks.json does not exist.
 Dashboard: http://localhost:38281/_/dashboard
 ```
