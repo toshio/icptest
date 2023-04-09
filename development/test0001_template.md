@@ -6,11 +6,11 @@
 
 以下のようにdfx newコマンドを使うことで、Rust用のサンプルアプリケーションを自動生成することができます。
 
-『test0001_hello』はプロジェクト名ですので、適宜変更しても構いません。
+『icptest』はプロジェクト名ですので、適宜変更しても構いません。
 
 ```bash
-$ dfx new --type=rust test0001_hello
-$ cd test0001_hello/
+$ dfx new --type=rust icptest
+$ cd icptest/
 ```
 
 ## ローカル環境でのCanister起動
@@ -25,7 +25,7 @@ dfx startコマンドで、ローカルPC環境で動作するCanisterを起動�
 $ dfx start --clean --background
 Running dfx start for version 0.12.1
 Using the default definition for the 'local' shared network because /home/toshio/.config/dfx/networks.json does not exist.
-Dashboard: http://localhost:43839/_/dashboard
+Dashboard: http://localhost:38281/_/dashboard
 ```
 
 ## ローカル環境へのDeploy
@@ -36,9 +36,9 @@ $ dfx deploy
 Deployed canisters.
 URLs:
   Frontend canister via browser
-    test0001_hello_frontend: http://127.0.0.1:4943/?canisterId=ryjl3-tyaaa-aaaaa-aaaba-cai
+    icptest_frontend: http://127.0.0.1:8000/?canisterId=ryjl3-tyaaa-aaaaa-aaaba-cai
   Backend canister via Candid interface:
-    test0001_hello_backend: http://127.0.0.1:4943/?canisterId=r7inp-6aaaa-aaaaa-aaabq-cai&id=rrkah-fqaaa-aaaaa-aaaaq-cai
+    icptest_backend: http://127.0.0.1:8000/?canisterId=r7inp-6aaaa-aaaaa-aaabq-cai&id=rrkah-fqaaa-aaaaa-aaaaq-cai
 ```
 
 ## 実行
@@ -47,49 +47,48 @@ Webブラウザーでそれぞれアクセスしてみましょう。
 
 ### Dashboard
 
-![](../.gitbook/assets/test0001_hello_01_dashboard.png)
+![](../.gitbook/assets/development/test0001_template/01_dashboard.png)
 
 ### Frontend
 
-![](../.gitbook/assets/test0001_hello_02_frontend.png)
+![](../.gitbook/assets/development/test0001_template/02_frontend.png)
 
 ### Backend
 
-![](../.gitbook/assets/test0001_hello_03_backend.png)
+![](../.gitbook/assets/development/test0001_template/03_backend.png)
 
 ## 解説
 
-生成されたアプリケーションは大きくFrontendとBackendの2種類があります。本ドキュメントでは、主にBackend側に着目して、どのような仕組みとなっているかを紐解き、1ステップずつ開発方法を学んでいきたいと思います。
+生成されたアプリケーションは大きくFrontendとBackendの2種類があります。本ドキュメントではとくにBackend側に着目して、どのような仕組みとなっているかを紐解き、1ステップずつ開発方法を学んでいきたいと思います。
 
-Backendを動作させるのに最低限必要な設定は
-
+生成されたファイルのうち、Backendを動作させるのに最低限必要な設定ファイルは以下となります。
 - dfx.json
 - didファイル
 - Cargo.toml
 - lib.rs
 
-なお、dfx newコマンドには、『--no-frontend』オプションがあってBackendのみ生成もできそうなのですが、執筆時点で最新のV0.12.1ではFrontendも同時に出力されてしまうようです。
+`dfx new`コマンドには、『--no-frontend』オプションがあってBackendのみ生成もできそうなのですが、執筆時点で最新のV0.13.1ではFrontendも同時に出力されてしまうようです。
 
 ###### dfx.json
 
 ```json
 {
   "canisters": {
-    "test0001_hello_backend": {
-      "candid": "src/test0001_hello_backend/test0001_hello_backend.did",
-      "package": "test0001_hello_backend",
+    "icptest_backend": {
+      "candid": "src/icptest_backend/icptest_backend.did",
+      "package": "icptest_backend",
       "type": "rust"
     },
-    "test0001_hello_frontend": {
+    "icptest_frontend": {
       "dependencies": [
-        "test0001_hello_backend"
+        "icptest_backend"
       ],
       "frontend": {
-        "entrypoint": "src/test0001_hello_frontend/src/index.html"
+        "entrypoint": "src/icptest_frontend/src/index.html"
       },
       "source": [
-        "src/test0001_hello_frontend/assets",
-        "dist/test0001_hello_frontend/"
+        "src/icptest_frontend/assets",
+        "dist/icptest_frontend/"
       ],
       "type": "assets"
     }
@@ -100,11 +99,12 @@ Backendを動作させるのに最低限必要な設定は
       "packtool": ""
     }
   },
+  "output_env_file": ".env",
   "version": 1
 }
 ```
 
-###### src/test0001_hello_backend/test0001_hello_backend.did
+###### src/icptest_backend/icptest_backend.did
 
 開発したアプリケーションは外部からどのように呼ばれるか、I/Fを規定します。
 
@@ -114,11 +114,12 @@ service : {
 }
 ```
 
-##### src/test0001_hello_backend/Cargo.toml
+##### src/icptest_backend/Cargo.toml
 
 ```
 [package]
-name = "test0001_hello_backend"
+[package]
+name = "icptest_backend"
 version = "0.1.0"
 edition = "2021"
 
@@ -133,7 +134,7 @@ ic-cdk = "0.6.0"
 ic-cdk-macros = "0.6.0"
 ```
 
-###### src/test0001_hello_backend/src/lib.rs
+###### src/icptest_backend/src/lib.rs
 
 ```rust
 #[ic_cdk_macros::query]
