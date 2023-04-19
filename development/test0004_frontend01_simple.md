@@ -1,4 +1,4 @@
-# frontend
+# frontend01: シンプルなHTML
 
 Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Canister](https://github.com/dfinity/sdk/tree/master/src/canisters/frontend/ic-frontend-canister)を使用します。
 
