@@ -2,15 +2,27 @@
 
 Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Canister](https://github.com/dfinity/sdk/tree/master/src/canisters/frontend/ic-frontend-canister)を使用します。
 
-[公式マニュアル](https://internetcomputer.org/docs/current/developer-docs/frontend/)には、React Frameworkを使ったサンプルがありますが、こうしたFrameworkを使わない単純なHello, Worldの最小構成について押さえておきたいと思います。
+[公式マニュアル](https://internetcomputer.org/docs/current/developer-docs/frontend/)には、React Frameworkを使ったサンプルがありますが、まずは、こうしたFrameworkを使わない単純なHello, Worldの最小構成について押さえておきたいと思います。
 
+仕組みと最小構成を押さえれば、そこからボトムアップで積み上げていくことができます。
+
+|項目         |値     |
+|:------------|:------|
+|Canister Name|icptest|
+
+## ファイル構成
+
+ルートドキュメントのHTMLを返すだけのシンプルな構成の場合、以下の2ファイルを用意するだけです。
+
+- dfx.json
+- dist/index.html
 
 ###### dfx.json
 
 ```json
 {
   "canisters": {
-    "test0004_frontend": {
+    "icptest": {
       "frontend": {
         "entrypoint": "dist/index.html"
       },
@@ -33,26 +45,65 @@ Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Ca
 
 ###### dist/index.html
 
-
-
-```
-dfx start --background --clean
-```
-
-```
-dfx deploy
-```
-
-
-
-```
-dfx canister create test0004_frontend
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Helo, world</h1>
+  </body>
+</html>
 ```
 
-dfx stop
+## ローカル実行環境の準備
+
+`dfx start`でローカルPC環境で動作するCanisterを起動します。
+
+```bash
+$ dfx start --background --clean
+```
+
+`dfx deploy`コマンドを実行することでCanisterへ配置できます。`dfx deploy`コマンドは、Canisterが無ければつくってくれますので、別途`dfx canister create`コマンド等を実行する必要は不要です。
+
+```bash
+$ dfx deploy
+︙
+Uploading assets to asset canister...
+Starting batch.
+Staging contents of new and changed assets:
+  /index.html 1/1 (75 bytes) sha 7a5fe09fb12f60b99511ddab85e329ba8774c71aba3df1a4616ea7438d49f442 
+Committing batch.
+Deployed canisters.
+URLs:
+  Frontend canister via browser
+    icptest: http://127.0.0.1:8000/?canisterId=rrkah-fqaaa-aaaaa-aaaaq-cai
+```
+
+## 実行画面
+
+![](../.gitbook/assets/development/test0004_frontend/01_helloworld.png)
 
 
+## ポート番号固定
 
-flutter create --platforms=web fluttertest
+配備したFrontendのポート番号は、以下のような定義ファイルを用意しておくことで固定にできます。
+##### $HOME/.config/dfx/networks.json
 
-flutter build web
+```json
+{
+  "local": {
+    "bind": "127.0.0.1:8000",
+    "type": "ephemeral",
+    "replica": {
+      "subnet_type": "system"
+    }
+  }
+}
+```
+
+## ローカル実行環境の停止方法
+
+`dfx start`で `--background`を指定したサービスは、以下のコマンドで停止できます。
+
+```bash
+$ dfx stop
+```

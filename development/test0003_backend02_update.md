@@ -1,10 +1,10 @@
-# データ更新/参照
+# Backend02: データ更新/参照
 
 Canisterにデータを保存するにはどうすればよいでしょうか。
 
 RustもICPも初学者の自分にとって、以下の内容は急に難易度が高くなって消化不良に陥ってしまいました。
 
-https://internetcomputer.org/docs/current/developer-docs/backend/rust/rust-profile
+[https://internetcomputer.org/docs/current/developer-docs/backend/rust/rust-profile](https://internetcomputer.org/docs/current/developer-docs/backend/rust/rust-profile)
 
 そこで、まずはユーザ関係なくCanister内にただ一つの文字列を設定/参照するサンプルを考えることにしました。
 
@@ -114,8 +114,39 @@ fn get() -> String {
 
 ### (3) thread_local
 
-Canisterは、
-
-[Intro to Building on the IC in Rust]
+Canisterのデータはthread_local内に保持するのがいいようです。以下を参考にするとよいでしょう。
+###### Intro to Building on the IC in Rust
 
 https://youtu.be/163yRgrOSC8?t=461
+
+## 課題
+
+実は、上記のプログラムを修正して再度CanisterにDeployし直すと、保存していたデータが消えてしまうという課題があります。
+
+これは、一般的なプログラムにおいて、プログラムを再度起動しなおすとプログラム内のメモリが初期化されることと同じようなものとイメージすると分かりやすいかもしれません。そのため、アップデートが行われる前にデータを永続化して、新しいプログラム側で読み直す必要があります。
+
+### ★★TODO★★
+
+これから調査する。
+
+```rust
+use ic_cdk::storage;
+
+// データを取得する関数
+#[ic_cdk_macros::query]
+fn get_data() -> String {
+    storage::get::<String>("data").unwrap_or_else(|| "");
+}
+
+// データを保存する関数
+#[ic_cdk_macros::update]
+fn set_data(data: String) {
+    storage::set("data", data);
+}
+```
+
+### アップデート
+
+```bash
+$ dfx canister install --all --mode upgrade
+```
