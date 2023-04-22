@@ -19,18 +19,18 @@
 
 「icptest」はプロジェクト名ですので、任意に設定して構いません。
 
-```
+```bash
 $ cargo new icptest --lib
 $ cd icptest
 ```
 
 ## 2. プロジェクト資材準備
 
-### (1) dfx.json
+### (1) [dfx.json](https://github.com/toshio/icptest/blob/master/development/test0002_backend01_hello/dfx.json)
 
 以下のようなdfx.jsonを用意してみましょう。
 
-```dfx.json
+```json
 {
   "canisters": {
     "backend": {
@@ -51,16 +51,16 @@ $ cd icptest
 
 ### (2) didファイルの作成
 
-###### backend.did
+###### [backend.did](https://github.com/toshio/icptest/blob/master/development/test0002_backend01_hello/backend.did)
 
 ```
 service : {
     "greet": (text) -> (text) query;
 }
 ```
-### (3) Cargo.toml修正
+### (3) [Cargo.toml](https://github.com/toshio/icptest/blob/master/development/test0002_backend01_hello/Cargo.toml)修正
 
-```
+```ini
 [package]
 name = "icptest"
 version = "0.1.0"
@@ -73,7 +73,7 @@ edition = "2021"
 
 ライブラリセクションを追加して、crate-typeにcdylibを指定します。cdylib を指定することで最終成果物の .wasm ファイルを動的ライブラリにします。
 
-```
+```ini
 [lib]
 crate-type = ["cdylib"]
 ```
@@ -93,7 +93,7 @@ $ cargo generate-lockfile
 
 ### (5) プログラム
 
-##### src/lib.rs
+##### [src/lib.rs](https://github.com/toshio/icptest/blob/master/development/test0002_backend01_hello/src/lib.rs)
 
 ```rust
 #[ic_cdk_macros::query]
@@ -143,7 +143,7 @@ $ dfx build
 
 ### (4) 配備
 
-```
+```bash
 $ dfx deploy
 ```
 

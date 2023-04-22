@@ -4,7 +4,9 @@ Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Ca
 
 [公式マニュアル](https://internetcomputer.org/docs/current/developer-docs/frontend/)には、React Frameworkを使ったサンプルがありますが、まずは、こうしたFrameworkを使わない単純なHello, Worldの最小構成について押さえておきたいと思います。
 
-仕組みと最小構成を押さえれば、そこからボトムアップで積み上げていくことができます。
+仕組みと最小構成が分かれば、そこからボトムアップで積み上げていくことができますから、後でNext.jsやFlutterなど自分のお気に入りのFrameworkを使い、Canisterへ配備することもできることでしょう。
+
+ここで紹介するFrontendでは、以下の設定を想定しています。
 
 |項目         |値     |
 |:------------|:------|
@@ -17,7 +19,7 @@ Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Ca
 - dfx.json
 - dist/index.html
 
-###### dfx.json
+###### [dfx.json](https://github.com/toshio/icptest/blob/master/development/test0004_frontend01_simple/dfx.json)
 
 ```json
 {
@@ -43,7 +45,7 @@ Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Ca
 }
 ```
 
-###### dist/index.html
+###### [dist/index.html](https://github.com/toshio/icptest/blob/master/development/test0004_frontend01_simple/dist/index.html)
 
 ```html
 <!DOCTYPE html>
