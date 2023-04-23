@@ -65,7 +65,7 @@ Flutterでは、`flutter build web`コマンドでリリース向けにビルド
 
 詳細はFlutterの [https://docs.flutter.dev/deployment/web](https://docs.flutter.dev/deployment/web)などを参照して下さい。
 
-ですから、build/webディレクトリをAsset Canisterに配備することで、ICPのFrontendでFlutterでつくられてWebアプリケーションを動作させることができるはずです。
+build/webディレクトリの資材一式をAsset Canisterに配備することで、ICPのFrontendでFlutterでつくられてWebアプリケーションを動作させることができるはずです。
 
 ### リリース向けビルド
 
