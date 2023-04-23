@@ -70,14 +70,12 @@ Flutterでは、`flutter build web`コマンドでリリース向けにビルド
 ### リリース向けビルド
 
 ```bash
-flutter build web
+$ flutter build web
 ```
 
 ### dfx.jsonの作成
 
-ICPのFrontendに資材を配置するには、dfx.jsonを作成する必要があります。
-
-Flutterが出力したファイルを配置するために、以下の設定ファイル例でdfx,jsonを用意します。
+Flutterが出力した配備資材一式をICPのFrontendに配置するために、以下の設定例でdfx.jsonを作成します。
 
 |Name         |Value               |Remarks    |
 |:------------|:-------------------|:----------|
@@ -119,6 +117,8 @@ Flutterが出力したファイルを配置するために、以下の設定フ�
 ```bash
 $ dfx start --background --clean
 ```
+
+### Canister作成&配備
 
 `dfx deploy`コマンドを実行することでCanisterへ配置できます。`dfx deploy`コマンドは、Canisterが無ければつくってくれますので、別途`dfx canister create`コマンド等を実行する必要は不要です。
 
