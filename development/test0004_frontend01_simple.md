@@ -2,11 +2,11 @@
 
 Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Canister](https://github.com/dfinity/sdk/tree/master/src/canisters/frontend/ic-frontend-canister)を使用します。
 
-[公式マニュアル](https://internetcomputer.org/docs/current/developer-docs/frontend/)には、React Frameworkを使ったサンプルがありますが、まずは、こうしたFrameworkを使わない単純なHello, Worldの最小構成について押さえておきたいと思います。
+[公式マニュアル](https://internetcomputer.org/docs/current/developer-docs/frontend/)には、React Frameworkを使ったサンプルがありますが、まずはFrameworkを使わず、Backendとも通信を行わない単純なHello, Worldを表示するWebページの最小構成について押さえておきたいと思います。
 
-仕組みと最小構成が分かれば、そこからボトムアップで積み上げていくことができますから、後でNext.jsやFlutterなど自分のお気に入りのFrameworkを使い、Canisterへ配備することもできることでしょう。
+仕組みと最小構成が分かれば、そこからボトムアップで積み上げていくことができますから、後でNext.jsやFlutterなど自分のお気に入りのFrameworkを使って、Backendとも通信を行うFrontendをCanisterへ配備することもできるようになるでしょう。
 
-ここで紹介するFrontendでは、以下の設定を想定しています。
+ここで解説するFrontendでは、以下の設定を想定しています。
 
 |項目         |値     |
 |:------------|:------|

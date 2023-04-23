@@ -1,9 +1,10 @@
 # frontend02: Flutter Webページ
 
-Flutterは、Googleなどによって開発されたオープンソースのFrameworkで、Android、iOS、Windows、Webなど様々なプラットフォームで動作するアプリケーションを開発できるクロスプラットフォームが特徴です。
+[前回](test0004_frontend01_simple)は単純なHTMLページを表示するだけでした。Webアプリケーションを作成する際、一般的には何らかのフレームワークを使うことになるでしょう。
+
+今回紹介する[Flutter](https://flutter.dev/)は、Googleなどによって開発されたオープンソースのFrameworkで、Android、iOS、Windows、Webなど様々なプラットフォームで動作するアプリケーションを開発できるクロスプラットフォームが特徴です。
 
 ここでは、FlutterでつくられたWebアプリケーションをCanisterに配置する方法について解説します。まずは、Webアプリケーションとして、プロジェクトを作成した際に生成されるサンプルをCanisterで動作させてみましょう。
-
 ## Flutterのインストール
 
 Flutterのインストールは公式ドキュメントを参照ください。筆者は、WindowsのWSL環境 (Ubuntu)を使用しています。
@@ -82,7 +83,6 @@ Flutterが出力した配備資材一式をICPのFrontendに配置するため�
 |Canister name|icptest             |任意       |
 |entrypoint   |build/web/index.html|Flutter固定|
 |source       |build/web           |Flutter固定|
-
 
 ##### dfx.json
 
