@@ -82,7 +82,7 @@ URLs:
 
 ## 実行画面
 
-![](../.gitbook/assets/development/test0004_frontend/01_helloworld.png)
+![](../.gitbook/assets/development/test0004_frontend01_simple/01_helloworld.png)
 
 
 ## ポート番号固定
