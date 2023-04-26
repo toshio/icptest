@@ -104,7 +104,7 @@ fn greet(name: String) -> String {
 
 ## 2. ビルド
 
-DappsをビルドしてローカルPC上にCanisterに配置する手順を以下に示します。
+DappをビルドしてローカルPC上にCanisterに配置する手順を以下に示します。
 
 ### (1) サービス起動
 
@@ -128,7 +128,7 @@ $ dfx start --clean --background
 $ dfx canister create backend
 ```
 
-Canisterが一つも登録されていない状況から本コマンドを実行した場合、作成するCanisterのほかに、Wallet Canisterが作成されます。Internet ComputerではDappsを実行させるためのCycleと呼ばれる燃料に相当するものが必要です。
+Canisterが一つも登録されていない状況から本コマンドを実行した場合、作成するCanisterのほかに、Wallet Canisterが作成されます。Internet ComputerではDappを実行させるためのCycleと呼ばれる燃料に相当するものが必要です。
 
 本番環境では ICPトークンをCycleに変換してDappを実行します。ローカル環境の場合には、コストはかかりませんが Cycle の仕組みがあり、作成されたWallet Canisterで管理されています。
 ### (3) ビルド
@@ -147,7 +147,7 @@ $ dfx build
 $ dfx deploy
 ```
 
-簡易UIのCanisterも用意されます。このCanisterを使うことで、WebページからDappsへ簡易のリクエストを発行できます。
+簡易UIのCanisterも用意されます。このCanisterを使うことで、WebページからDappへ簡易のリクエストを発行できます。
 
 ### 補足
 

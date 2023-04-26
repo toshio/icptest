@@ -19,7 +19,7 @@ RustもICPも初学者の自分にとって、以下の内容は急に難易度�
 - Cargo.toml
 - src/lib.rs
 
-はじめのうちは各ファイルの関連性がよく分かりませんが、何度かDappsサンプルを書いていくうちになんとなく分かってくると思います。
+はじめのうちは各ファイルの関連性がよく分かりませんが、何度かDappサンプルを書いていくうちになんとなく分かってくると思います。
 
 ###### [dfx.json](https://github.com/toshio/icptest/blob/master/development/test0003_backend02_update/dfx.json)
 
@@ -74,7 +74,7 @@ ic-cdk-macros = "0.6.10"
 
 ##### [src/lib.rs](https://github.com/toshio/icptest/blob/master/development/test0003_backend02_update/src/lib.rs)
 
-私自身、Rust初学者でICP Dapps開発も間もないので、試行錯誤しつつ少しずつ理解しながらという手探り状態ですので最適なプログラムとはいえませんが、以下、作成したプログラムを示します。
+私自身、Rust初学者でICP Dapp開発も間もないので、試行錯誤しつつ少しずつ理解しながらという手探り状態ですので最適なプログラムとはいえませんが、以下、作成したプログラムを示します。
 
 ```rust
 use std::cell::RefCell;
