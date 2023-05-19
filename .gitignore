@@ -1,8 +1,12 @@
 # Rust
-**/target/
-**/Cargo.lock
-**/*.rs.bk
+target/
+Cargo.lock
+*.rs.bk
 
 # ICP
-**/.dfx
-**/.env
+.dfx/
+.env
+
+# private
+study/
+.project
