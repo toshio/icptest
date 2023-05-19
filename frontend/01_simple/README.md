@@ -19,7 +19,7 @@ Canisterとは通信を行わず、ルートドキュメントのHTMLを返す�
 - dfx.json
 - dist/index.html
 
-###### [dfx.json](https://github.com/toshio/icptest/blob/master/frontend/01_simple/dfx.json)
+###### [dfx.json](dfx.json)
 
 ```json
 {
@@ -45,7 +45,7 @@ Canisterとは通信を行わず、ルートドキュメントのHTMLを返す�
 }
 ```
 
-###### [dist/index.html](https://github.com/toshio/icptest/blob/master/frontend/01_simple/dist/index.html)
+###### [dist/index.html](dist/index.html)
 
 ```html
 <!DOCTYPE html>
@@ -82,8 +82,7 @@ URLs:
 
 ## 実行画面
 
-![](../.gitbook/assets/frontend/01_simple/01_helloworld.png)
-
+![](../../.gitbook/assets/frontend/01_simple/01_helloworld.png)
 
 ## ポート番号固定
 

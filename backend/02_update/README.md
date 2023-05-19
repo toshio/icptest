@@ -21,7 +21,7 @@ RustもICPも初学者の自分にとって、以下の内容は急に難易度�
 
 はじめのうちは各ファイルの関連性がよく分かりませんが、何度かDappサンプルを書いていくうちになんとなく分かってくると思います。
 
-###### [dfx.json](https://github.com/toshio/icptest/blob/master/development/test0003_backend02_update/dfx.json)
+###### [dfx.json](dfx.json)
 
 ```json
 {
@@ -42,7 +42,7 @@ RustもICPも初学者の自分にとって、以下の内容は急に難易度�
 }
 ```
 
-###### [backend.did](https://github.com/toshio/icptest/blob/master/development/test0003_backend02_update/backend.did)
+###### [backend.did](backend.did)
 
 set()とget()の2つのI/Fを用意することにしました。set()の引数は文字列、get()の戻り値は文字列です。更新を伴わない参照系のget()には `query` を指定すると良いでしょう。
 
@@ -53,7 +53,7 @@ service : {
 }
 ```
 
-##### [Cargo.toml](https://github.com/toshio/icptest/blob/master/development/test0003_backend02_update/Cargo.toml)
+##### [Cargo.toml](Cargo.toml)
 
 `cargo new <プロジェクト名> --lib`で新規作成したものに、`[lib]`セクションと、`[dependencies]`セクションを追加したものです。
 
@@ -72,7 +72,7 @@ ic-cdk = "0.7.4"
 ic-cdk-macros = "0.6.10"
 ```
 
-##### [src/lib.rs](https://github.com/toshio/icptest/blob/master/development/test0003_backend02_update/src/lib.rs)
+##### [src/lib.rs](src/lib.rs)
 
 私自身、Rust初学者でICP Dapp開発も間もないので、試行錯誤しつつ少しずつ理解しながらという手探り状態ですので最適なプログラムとはいえませんが、以下、作成したプログラムを示します。
 
@@ -100,7 +100,7 @@ fn get() -> String {
 
 ## 実行例
 
-![](../.gitbook/assets/development/test0003_backend02_update/01_update.png)
+![](../../.gitbook/assets/backend/02_update/01_update.png)
 
 ## 解説
 

@@ -40,13 +40,13 @@ Canister上から関数が正しく呼び出させるようcrate-typeを`cdylib`
 crate-type = ["cdylib"]
 ```
 
-###### [Cargo.toml](https://github.com/toshio/rust-ic-starter/blob/main/days/day1/Cargo.toml)
+###### [Cargo.toml](Cargo.toml)
 
 ## 3. dfx.jsonの作成
 
 Canisterの定義を行います。
 
-###### [dfx.json](https://github.com/toshio/rust-ic-starter/blob/main/days/day1/dfx.json)
+###### [dfx.json](dfx.json)
 
 ```json
 {
@@ -73,7 +73,7 @@ dfx.jsonの`canisters` > `day1` > `candid`項目に指定したファイル名�
 
 [Motoko Bootcamp Day1]()の
 
-###### [day1.did](https://github.com/toshio/rust-ic-starter/blob/main/days/day1/day1.did)
+###### [day1.did](day1.did)
 
 ```
 service : {
@@ -108,7 +108,7 @@ https://internetcomputer.org/docs/current/references/candid-ref
 - sqrt()
 - floor()
 
-###### [lib.rs](https://github.com/toshio/rust-ic-starter/blob/main/days/day1/src/lib.rs)
+###### [lib.rs](src/lib.rs)
 
 ## 4. Unitテスト
 

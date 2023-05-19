@@ -26,7 +26,7 @@ $ cd icptest
 
 ## 2. プロジェクト資材準備
 
-### (1) [dfx.json](https://github.com/toshio/icptest/blob/master/backend/01_hello/dfx.json)
+### (1) [dfx.json](dfx.json)
 
 以下のようなdfx.jsonを用意してみましょう。
 
@@ -51,14 +51,14 @@ $ cd icptest
 
 ### (2) didファイルの作成
 
-###### [backend.did](https://github.com/toshio/icptest/blob/master/backend/01_hello/backend.did)
+###### [backend.did](backend.did)
 
 ```
 service : {
     "greet": (text) -> (text) query;
 }
 ```
-### (3) [Cargo.toml](https://github.com/toshio/icptest/blob/master/backend/01_hello/Cargo.toml)修正
+### (3) [Cargo.toml](Cargo.toml)編集
 
 ```ini
 [package]
@@ -93,7 +93,7 @@ $ cargo generate-lockfile
 
 ### (5) プログラム
 
-##### [src/lib.rs](https://github.com/toshio/icptest/blob/master/backend/01_hello/src/lib.rs)
+##### [src/lib.rs](src/lib.rs)
 
 ```rust
 #[ic_cdk_macros::query]
@@ -157,4 +157,4 @@ $ dfx deploy
 
 各ファイルと定数の関係を以下に示します。
 
-![](../.gitbook/assets/backend/01_hello/01_relation.drawio.png)
+![](../../.gitbook/assets/backend/01_hello/01_relation.drawio.png)
