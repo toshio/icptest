@@ -47,15 +47,15 @@ Webブラウザーでそれぞれアクセスしてみましょう。
 
 ### Dashboard
 
-![](../.gitbook/assets/development/test0001_template/01_dashboard.png)
+![](.gitbook/assets/template/01_dashboard.png)
 
 ### Frontend
 
-![](../.gitbook/assets/development/test0001_template/02_frontend.png)
+![](.gitbook/assets/template/02_frontend.png)
 
 ### Backend
 
-![](../.gitbook/assets/development/test0001_template/03_backend.png)
+![](.gitbook/assets/template/03_backend.png)
 
 ## 解説
 
