@@ -8,7 +8,7 @@
 * [テンプレート生成 (dfx new)](template.md)
 * [Frontend開発](frontend/README.md)
   * [1. シンプルなHTML](frontend/01\_simple/README.md)
-* [Backend開発](development/backend-kai-fa/README.md)
+* [Backend開発](backend/README.md)
   * [1. Hello](backend/01\_hello/README.md)
   * [2. データ更新/参照](backend/02\_update/README.md)
 * [Bootcamp](bootcamp/README.md)
@@ -20,3 +20,6 @@
   * [The Dapp 🚀](bootcamp/day6/README.md)
 
 ## ツール <a href="#tools" id="tools"></a>
+
+* [dfx](/tools/dfx.md)
+* [quill](/tools/quill.md)

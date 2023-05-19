@@ -7,7 +7,6 @@
 Rustのプロジェクト「day1」を作成します。`cargo new`コマンドを`--lib`オプションを付与して実行します。
 
 ```
-$ cd days
 $ cargo new day1 --lib
 $ cd day1
 ```
@@ -67,11 +66,11 @@ Canisterの定義を行います。
 }
 ```
 
-## 3. candidの作成
+## 4. candidの作成
 
-dfx.jsonの`[canisters]` > `[day1]` > `[candid]`項目に指定したファイル名で、Canisterが提供する関数を定義します。
+dfx.jsonの [canisters] > [day1] > [candid]項目に指定したファイルに、Canisterが提供する関数のI/Fを定義します。
 
-[Motoko Bootcamp Day1](./)のら、
+[Motoko Bootcamp Day1 📺 Interface](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-1/project/README.MD#-interface)に相当するcandidを用意します。
 
 [**day1.did**](day1.did)
 
@@ -89,11 +88,11 @@ service : {
 }
 ```
 
-参考：Candidリファレンス
+### 参考：Candidリファレンス
 
 {% embed url="https://internetcomputer.org/docs/current/references/candid-ref" %}
 
-## 4. lib.rsの編集
+## 5. lib.rsの編集
 
 `cargo new`コマンドで生成されたlib.rsの中身をクリアして、day1用のプログラムを作成します。
 
@@ -111,7 +110,7 @@ service : {
 
 [**lib.rs**](src/lib.rs)
 
-## 4. Unitテスト
+## 6. Unitテスト
 
 Rustではソース内にUnitテストコードを含めて記述することができます。
 
@@ -121,7 +120,7 @@ TODO: 今回の範囲ではロジックにIC色は無いため、Local canister�
 $ cargo test
 ```
 
-## 6. Local Canisterの起動
+## 7. Local Canisterの起動
 
 Local Canisterを起動します。
 
@@ -131,7 +130,7 @@ Local Canisterを起動します。
 $ dfx start --background --clean
 ```
 
-## 7. Deploy
+## 8. Deploy
 
 ```bash
 $ dfx deploy

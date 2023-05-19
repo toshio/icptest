@@ -1,6 +1,4 @@
-## quill
-
-quillを使う。
+# quill
 
 https://internetcomputer.org/docs/current/references/quill-cli-reference/
 
@@ -27,4 +25,3 @@ Account id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 seed.txtファイルが出力される。
-
