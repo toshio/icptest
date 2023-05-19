@@ -14,7 +14,7 @@ Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Ca
 
 ## ファイル構成
 
-ルートドキュメントのHTMLを返すだけのシンプルな構成の場合、以下の2ファイルを用意するだけです。
+Canisterとは通信を行わず、ルートドキュメントのHTMLを返すだけのシンプルな構成の場合、以下の2ファイルを用意するだけです。
 
 - dfx.json
 - dist/index.html

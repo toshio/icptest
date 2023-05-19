@@ -69,7 +69,7 @@ edition = "2021"
 [dependencies]
 ```
 
-#### a. create-type追加
+#### a. crate-type追加
 
 ライブラリセクションを追加して、crate-typeにcdylibを指定します。cdylib を指定することで最終成果物の .wasm ファイルを動的ライブラリにします。
 
