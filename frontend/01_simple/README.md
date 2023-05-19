@@ -1,4 +1,4 @@
-# frontend01: シンプルなHTML
+# 1. シンプルなHTML
 
 Internet ComputerのDappとして、WebのFrontendを動かすには、[Asset Canister](https://github.com/dfinity/sdk/tree/master/src/canisters/frontend/ic-frontend-canister)を使用します。
 
@@ -19,7 +19,7 @@ Canisterとは通信を行わず、ルートドキュメントのHTMLを返す�
 - dfx.json
 - dist/index.html
 
-###### [dfx.json](https://github.com/toshio/icptest/blob/master/development/test0004_frontend01_simple/dfx.json)
+###### [dfx.json](https://github.com/toshio/icptest/blob/master/frontend/01_simple/dfx.json)
 
 ```json
 {
@@ -45,7 +45,7 @@ Canisterとは通信を行わず、ルートドキュメントのHTMLを返す�
 }
 ```
 
-###### [dist/index.html](https://github.com/toshio/icptest/blob/master/development/test0004_frontend01_simple/dist/index.html)
+###### [dist/index.html](https://github.com/toshio/icptest/blob/master/frontend/01_simple/dist/index.html)
 
 ```html
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ URLs:
 
 ## 実行画面
 
-![](../.gitbook/assets/development/test0004_frontend01_simple/01_helloworld.png)
+![](../.gitbook/assets/frontend/01_simple/01_helloworld.png)
 
 
 ## ポート番号固定
