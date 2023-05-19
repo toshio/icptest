@@ -25,7 +25,7 @@ day1
 
 ### (1) IC関連ライブラリ追加
 
-[ic-cdk](https://docs.rs/ic-cdk/latest/ic_cdk/)と[ic-cdk-macros](https://docs.rs/ic-cdk-macros/latest/ic_cdk_macros/)ライブラリを使用します。最新バージョンでよいかと思いますので、以下のように実行ます。
+[ic-cdk](https://docs.rs/ic-cdk/latest/ic\_cdk/)と[ic-cdk-macros](https://docs.rs/ic-cdk-macros/latest/ic\_cdk\_macros/)ライブラリを使用します。最新バージョンでよいかと思いますので、以下のように実行ます。
 
 ```bash
 $ cargo add ic-cdk ic-cdk-macros
@@ -40,13 +40,13 @@ Canister上から関数が正しく呼び出させるようcrate-typeを`cdylib`
 crate-type = ["cdylib"]
 ```
 
-###### [Cargo.toml](Cargo.toml)
+[**Cargo.toml**](Cargo.toml)
 
 ## 3. dfx.jsonの作成
 
 Canisterの定義を行います。
 
-###### [dfx.json](dfx.json)
+[**dfx.json**](dfx.json)
 
 ```json
 {
@@ -69,11 +69,11 @@ Canisterの定義を行います。
 
 ## 3. candidの作成
 
-dfx.jsonの`canisters` > `day1` > `candid`項目に指定したファイル名で、Canisterが提供する関数を定義します。
+dfx.jsonの`[canisters]` > `[day1]` > `[candid]`項目に指定したファイル名で、Canisterが提供する関数を定義します。
 
-[Motoko Bootcamp Day1]()の
+[Motoko Bootcamp Day1](./)のら、
 
-###### [day1.did](day1.did)
+[**day1.did**](day1.did)
 
 ```
 service : {
@@ -89,8 +89,9 @@ service : {
 }
 ```
 
+参考：Candidリファレンス
 
-https://internetcomputer.org/docs/current/references/candid-ref
+{% embed url="https://internetcomputer.org/docs/current/references/candid-ref" %}
 
 ## 4. lib.rsの編集
 
@@ -98,17 +99,17 @@ https://internetcomputer.org/docs/current/references/candid-ref
 
 [Motoko Bootcamp Day1](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-1/project/README.MD)と同じように、以下の関数を実装します。
 
-- add()
-- sub()
-- mul()
-- div()
-- reset()
-- see()
-- power()
-- sqrt()
-- floor()
+* add()
+* sub()
+* mul()
+* div()
+* reset()
+* see()
+* power()
+* sqrt()
+* floor()
 
-###### [lib.rs](src/lib.rs)
+[**lib.rs**](src/lib.rs)
 
 ## 4. Unitテスト
 
@@ -158,14 +159,14 @@ $ cargo generate-lockfile
     └── lib.rs
 ```
 
-|File|
-|:---------|
-|Cargo.lock|
-|Cargo.toml|
-|day1.did|
-|dfx.json|
-|src/lib.rs|
+| File       |
+| ---------- |
+| Cargo.lock |
+| Cargo.toml |
+| day1.did   |
+| dfx.json   |
+| src/lib.rs |
 
-- `dfx start`コマンドを実行すると`.dfx`ディレクトリが作成されます。
-- `cargo test`コマンドを実行すると`target/debug`ディレクトリが作成されます。
-- `dfx deploy`コマンドを実行すると`target/release`ディレクトリ、および`target/wasm32-unknown-unknown`が作成されます。
+* `dfx start`コマンドを実行すると`.dfx`ディレクトリが作成されます。
+* `cargo test`コマンドを実行すると`target/debug`ディレクトリが作成されます。
+* `dfx deploy`コマンドを実行すると`target/release`ディレクトリ、および`target/wasm32-unknown-unknown`が作成されます。
