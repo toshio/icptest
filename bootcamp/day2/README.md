@@ -68,7 +68,7 @@ Canisterの定義を行います。
 
 ## 4. candidの作成
 
-dfx.jsonの [canisters] > [day12 > [candid]項目に指定したファイルに、Canisterが提供する関数のI/Fを定義します。
+dfx.jsonの [canisters] > [day2] > [candid]項目に指定したファイルに、Canisterに配置するDappが提供する関数のI/Fを定義します。
 
 [Motoko Bootcamp Day2 📺 Interface](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-2/project/README.MD#-interfacee)に相当するcandidを用意します。
 
@@ -78,7 +78,5 @@ dfx.jsonの [canisters] > [day12 > [candid]項目に指定したファイルに�
 ★
 ```
 
-MotokoのTimeはint (System time is represent as nanoseconds since 1970-01-01.)
-→Rust的にはint128でOK。
-
-https://internetcomputer.org/docs/current/motoko/main/base/Time
+Motokoの[Time](https://internetcomputer.org/docs/current/motoko/main/base/Time
+)はint (System time is represent as nanoseconds since 1970-01-01.)のようで、Rust言語ではint128でOKと思われます。
