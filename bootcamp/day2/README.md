@@ -77,3 +77,8 @@ dfx.jsonの [canisters] > [day12 > [candid]項目に指定したファイルに�
 ```
 ★
 ```
+
+MotokoのTimeはint (System time is represent as nanoseconds since 1970-01-01.)
+→Rust的にはint128でOK。
+
+https://internetcomputer.org/docs/current/motoko/main/base/Time

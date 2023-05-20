@@ -114,7 +114,7 @@ service : {
 
 Rustではソース内にUnitテストコードを含めて記述することができます。
 
-TODO: 今回の範囲ではロジックにIC色は無いため、Local canisterに配備せずそのまま実行する方法とします。
+TODO: 今回の範囲ではロジックにIC色は無いため、Local canisterに配備せずそのまま実行する方法としましたが、Canisterに配置したテストの方法は未調査。
 
 ```bash
 $ cargo test
