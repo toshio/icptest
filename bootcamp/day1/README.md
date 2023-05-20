@@ -108,7 +108,16 @@ service : {
 * sqrt()
 * floor()
 
-[**lib.rs**](src/lib.rs)
+Canister内部で保持するデータは、以下のページ例のように「thread_local!」内で管理するようです。
+
+https://internetcomputer.org/docs/current/developer-docs/backend/rust/rust-profile
+
+
+######　[lib.rs](src/lib.rs)
+
+```rust
+`
+```
 
 ## 6. Unitテスト
 
