@@ -2,6 +2,8 @@
 
 2023年5月に開催された[Motoko Bootcamp Day 1](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-1/project/README.MD)のプロジェクトをRust言語で試してみました。
 
+Local Canisterへの配備まで実施した手順を記載します。
+
 ## 1. Rustプロジェクト作成
 
 Rustのプロジェクト「day1」を作成します。`cargo new`コマンドを`--lib`オプションを付与して実行します。
@@ -65,6 +67,8 @@ Canisterの定義を行います。
   "version": 1
 }
 ```
+
+dfx.jsonの記述に関する公式ドキュメントは[こちら](https://internetcomputer.org/docs/current/references/dfx-json-reference)が参考になります。
 
 ## 4. candidの作成
 
@@ -134,7 +138,7 @@ fn add(x: f64) -> f64 {
 
 Rustではソース内にUnitテストコードを含めて記述することができます。
 
-TODO: 今回の範囲ではロジックにIC色は無いため、Local canisterに配備せずそのまま実行する方法としましたが、Canisterに配置したテストの方法は未調査。
+TODO: 今回の範囲ではロジックにIC色は無いため、UnitテストはLocal canisterに配備せずそのまま実行する方法としましたが、Canisterに配置したテストの方法は未調査。
 
 ```bash
 $ cargo test
@@ -150,7 +154,7 @@ Local Canisterを起動します。
 $ dfx start --background --clean
 ```
 
-## 8. Deploy
+## 8. Local Canisterへの配備
 
 ```bash
 $ dfx deploy
