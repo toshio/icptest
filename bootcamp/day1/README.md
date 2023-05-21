@@ -112,11 +112,24 @@ Canister内部で保持するデータは、以下のページ例のように「
 
 https://internetcomputer.org/docs/current/developer-docs/backend/rust/rust-profile
 
-
-######　[lib.rs](src/lib.rs)
+###### [lib.rs](src/lib.rs)
 
 ```rust
-`
+use std::cell::RefCell;
+
+thread_local! {
+    static COUNTER: RefCell<f64> = RefCell::new(0f64);
+}
+
+#[ic_cdk_macros::update]
+fn add(x: f64) -> f64 {
+    COUNTER.with(|counter| {
+        let mut c = counter.borrow_mut();
+        *c += x;
+        *c
+    })
+}
+︙
 ```
 
 ## 6. Unitテスト
