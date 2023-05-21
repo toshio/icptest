@@ -144,6 +144,10 @@ TODO: 今回の範囲ではロジックにIC色は無いため、Unitテスト�
 $ cargo test
 ```
 
+### 補足
+
+assertによる一致判定を行う際、`assert_eq!(expected, actual)`なのか、`assert_eq!(actual, expected)`なのかは[議論](https://users.rust-lang.org/t/assert-eq-expected-and-actual/20304)がありますが、Rust公式ドキュメントの[Macro std::assert_eq]([https://doc.rust-lang.org/std/macro.assert_eq.html])のExamplesや、[JUnitなどの流れ](https://stackoverflow.com/questions/2404978/why-are-assertequals-parameters-in-the-order-expected-actual#answer-57059952)から、前者としています。
+
 ## 7. Local Canisterの起動
 
 Local Canisterを起動します。

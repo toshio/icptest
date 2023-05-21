@@ -1,0 +1,21 @@
+type Time = int;
+type Homework = record {
+    "title": text;
+    "description": text;
+    "dueDate": Time;
+    "completed": bool;
+};
+
+type ResultHomework = variant { Ok: Homework; Err: text };
+type ResultOnly = variant { Ok; Err: text };
+
+service: {
+    addHomework: (Homework) -> (nat);
+    getHomework: (nat) -> (ResultHomework) query;
+    updateHomework: (nat, Homework) -> (ResultOnly);
+    markAsCompleted: (nat) -> (ResultOnly);
+    deleteHomework: (nat) -> (ResultOnly);
+    getAllHomework: () -> (vec Homework) query;
+    getPendingHomework: () -> (vec Homework) query;
+    searchHomework: (text) -> (vec Homework) query;
+}
