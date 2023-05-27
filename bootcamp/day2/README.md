@@ -72,7 +72,7 @@ Canisterの定義を行います。
 
 dfx.jsonの [canisters] > [day2] > [candid]項目に指定したファイルに、Canisterに配置するDappが提供する関数のI/Fを定義します。
 
-[Motoko Bootcamp Day2 📺 Interface](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-2/project/README.MD#-interfacee)に相当するcandidを用意します。
+[Motoko Bootcamp Day2 📺 Interface](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-2/project/README.MD#-interface)に相当するcandidを用意します。
 
 ###### [day2.did](day2.did)
 

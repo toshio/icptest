@@ -5,7 +5,7 @@ use ic_cdk::{
 };
 use std::cell::RefCell;
 
-#[derive(Clone, Debug, Default, CandidType, Deserialize)]
+#[derive(Clone, Debug, CandidType, Deserialize)]
 #[allow(non_snake_case)]
 struct Homework {
     pub title: String,

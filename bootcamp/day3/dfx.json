@@ -1,0 +1,16 @@
+{
+  "canisters": {
+    "day3": {
+      "candid": "./day3.did",
+      "package": "day3",
+      "type": "rust"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "version": 1
+}

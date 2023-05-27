@@ -1,0 +1,33 @@
+type Content = variant {
+  Text: text;
+  Image: blob;
+  Video: blob;
+};
+
+type Message = record {
+  content: Content;
+  creator: principal;
+  vote: int;
+};
+
+type Result = variant {
+  Ok;
+  Err: text;
+};
+
+type ResultMessage = variant {
+  Ok: Message;
+  Err: text;
+};
+
+service : {
+  deleteMessage: (nat) -> (Result);
+  downVote: (nat) -> (Result);
+  getAllMessages: () -> (vec Message) query;
+  getAllMessagesRanked: () -> (vec Message) query;
+  getMessage: (nat) -> (ResultMessage) query;
+  upVote: (nat) -> (Result);
+  updateMessage: (nat, Content) -> (Result);
+  writeMessage: (Content) -> (nat);
+};
+

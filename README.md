@@ -4,4 +4,4 @@ ICP (Internet Computer Protocol)上で動作するDapp (Decentraized Application
 
 これからICPで開発をはじめようと思っている方に少しでも参考になればと思います。
 
-{% embed url="https://toshio.gitbook.io/icp-rust-cdk/" %}
+[https://toshio.gitbook.io/icp-rust-cdk/](https://toshio.gitbook.io/icp-rust-cdk/)
