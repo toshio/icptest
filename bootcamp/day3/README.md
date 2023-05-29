@@ -101,13 +101,139 @@ type ResultMessage = variant {
 };
 
 service : {
+  writeMessage: (Content) -> (nat);
+  getMessage: (nat) -> (ResultMessage) query;
+  updateMessage: (nat, Content) -> (Result);
   deleteMessage: (nat) -> (Result);
+  upVote: (nat) -> (Result);
   downVote: (nat) -> (Result);
   getAllMessages: () -> (vec Message) query;
   getAllMessagesRanked: () -> (vec Message) query;
-  getMessage: (nat) -> (ResultMessage) query;
-  upVote: (nat) -> (Result);
-  updateMessage: (nat, Content) -> (Result);
-  writeMessage: (Content) -> (nat);
 };
 ```
+
+## 5. lib.rsの編集
+
+`cargo new`コマンドで生成されたlib.rsの中身をクリアして、day2用のプログラムを作成します。
+
+[Motoko Bootcamp Day 3](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-3/project/README.MD)と同じように、以下の関数を実装します。
+
+- writeMessage()
+- getMessage()
+- updateMessage()
+- deleteMessage()
+- upVote()
+- downVote()
+- getAllMessages()
+- getAllMessagesRanked()
+
+### ソース解説
+
+#### (a) Content列挙型
+
+扱うコンテンツを列挙型 (enum)として定義しています。
+
+Textm Image, Videoのいずれかの値をとり、それぞれ異なるデータ型のデータを持ちます。
+
+```rust
+enum Content {
+    Text(String),
+    Image(Vec<u8>),
+    Video(Vec<u8>),
+}
+```
+
+#### (b) Message構造体
+
+Contentとvote、creatorから構成される構造体を定義します。
+
+Principal型はICのPrincipal IDを示しており投稿者も記録します。
+
+```rust
+struct Message {
+    content: Content,
+    vote: i128,
+    creator: Principal
+}
+```
+
+#### (c) Canisterの保持データ
+
+Canister内に保持するデータは以下の2種類です。
+
+- メッセージ自動採番用
+- メッセージIDをキー、Messageデータを値とするBTreeMap
+
+
+以下のようにスレッドローカルデータで保持するのが作法のようです。
+
+```rust
+thread_local! {
+    static MESSAGE_ID: RefCell<u128> = RefCell::new(0);
+    static WALL: RefCell<BTreeMap<u128, Message>> = RefCell::new(BTreeMap::new());
+}
+```
+
+#### (d) 関数名
+
+Canisterが提供する関数の名前が`camelCase`形式なのに対し、Rustは一般的に`Snake_case`形式を推奨しているため、コンパイル時に以下のような警告が出ます。
+
+```
+warning: variable `xxx` should have a snake case name
+```
+
+先頭行に以下を入れておくことで、警告を抑止することができます。
+
+```rust
+#![allow(non_snake_case)]
+```
+
+## 6. Unitテスト
+
+Day1, Day2のようにUnitテストを記述して、`cargo test`を実行したところ、ロジックにICのPrincipal型が含まれることが原因で、「xxxx should only be called inside canisters.」のようなエラーが出ました。
+
+```rust
+#[cfg(test)]
+mod tests {
+
+  use super::*;
+
+  #[test]
+  fn writeMessage() {
+    let id = crate::writeMessage(Content::Text(String::from("TEST")));
+    ︙
+  }
+}
+```
+
+ソース中にIC色があるとUnitテストが上手く行えないようですので、以下のいずれかの方法でテストするとよいでしょう。
+
+- Canisterに配置してテストを行う
+- IC CDKのAPIを直接呼ばずに抽象化して、テスト時はスタブを使うようにする
+
+後者の方法として、以下の記事が参考になりそうです。
+
+### Test your canister code even in presence of system API calls
+
+https://internetcomputer.org/docs/current/developer-docs/security/rust-canister-development-security-best-practices#test-your-canister-code-even-in-presence-of-system-api-calls
+
+
+TODO: IC色のあるUnitテスト方法について後日整理する
+
+## 7. Local Canisterの起動
+
+Local Canisterを起動します。
+
+`--background`オプションでサービス常駐でき、`--clean`を付与すると真っ新な状態でLocal canisterを起動できます。
+
+```bash
+$ dfx start --background --clean
+```
+
+## 8. Local Canisterへの配備
+
+```bash
+$ dfx deploy
+```
+
+Cargo.lockがディレクトリに存在しない場合`dfx deploy`がエラーとなりますので、`cargo generate-lockfile`を実行するとよいでしょう。

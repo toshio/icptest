@@ -21,13 +21,13 @@ type ResultMessage = variant {
 };
 
 service : {
+  writeMessage: (Content) -> (nat);
+  getMessage: (nat) -> (ResultMessage) query;
+  updateMessage: (nat, Content) -> (Result);
   deleteMessage: (nat) -> (Result);
+  upVote: (nat) -> (Result);
   downVote: (nat) -> (Result);
   getAllMessages: () -> (vec Message) query;
   getAllMessagesRanked: () -> (vec Message) query;
-  getMessage: (nat) -> (ResultMessage) query;
-  upVote: (nat) -> (Result);
-  updateMessage: (nat, Content) -> (Result);
-  writeMessage: (Content) -> (nat);
 };
 
