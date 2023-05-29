@@ -112,7 +112,7 @@ service : {
 
 ## 5. lib.rsの編集
 
-`cargo new`コマンドで生成されたlib.rsの中身をクリアして、day2用のプログラムを作成します。
+`cargo new`コマンドで生成されたlib.rsの中身をクリアして、day3用のプログラムを作成します。
 
 [Motoko Bootcamp Day 3](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-3/project/README.MD)と同じように、以下の関数を実装します。
 
