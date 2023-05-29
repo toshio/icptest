@@ -2,8 +2,6 @@
 
 2023年5月に開催された[Motoko Bootcamp Day 3](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-3/project/README.MD)のプロジェクトをRust言語で実装します。
 
-TODO: 対応中
-
 ## 1. Rustプロジェクト作成
 
 Rustのプロジェクト「day3」を作成します。`cargo new`コマンドを`--lib`オプションを付与して実行します。
@@ -73,9 +71,9 @@ Canisterの定義を行います。
 
 dfx.jsonの [canisters] > [day3] > [candid]項目に指定したファイルに、Canisterに配置するDappが提供する関数のI/Fを定義します。
 
-[Motoko Bootcamp Day2 📺 Interface](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-3/project/README.MD#-interface)に相当するcandidを用意します。
+[Motoko Bootcamp Day3 📺 Interface](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-3/project/README.MD#-interface)に相当するcandidを用意します。
 
-###### [day3.did](day2.did)
+###### [day3.did](day3.did)
 
 ```
 type Content = variant {
@@ -127,9 +125,27 @@ service : {
 - getAllMessages()
 - getAllMessagesRanked()
 
-### ソース解説
+###### [lib.rs](src/lib.rs)
 
-#### (a) Content列挙型
+Rust言語仕様の理解が十分でないため、作成したソースコードは所有権まわりをはじめ最適化されていない可能性がありますのでご注意ください。もしも、おかしな実装等が見つかりましたらが、ご指摘いただけますとさいわいです。
+
+### ソース説明
+
+#### (a) 関数名
+
+Canisterが提供する関数の名前が`camelCase`形式なのに対し、Rustは一般的に`Snake_case`形式を推奨しているため、コンパイル時に以下のような警告が出ます。
+
+```
+warning: variable `xxx` should have a snake case name
+```
+
+先頭行に以下を入れておくことで、警告を抑止することができます。
+
+```rust
+#![allow(non_snake_case)]
+```
+
+#### (b) Content列挙型
 
 扱うコンテンツを列挙型 (enum)として定義しています。
 
@@ -143,7 +159,7 @@ enum Content {
 }
 ```
 
-#### (b) Message構造体
+#### (c) Message構造体
 
 Contentとvote、creatorから構成される構造体を定義します。
 
@@ -157,7 +173,7 @@ struct Message {
 }
 ```
 
-#### (c) Canisterの保持データ
+#### (d) Canisterの保持データ
 
 Canister内に保持するデータは以下の2種類です。
 
@@ -174,23 +190,11 @@ thread_local! {
 }
 ```
 
-#### (d) 関数名
-
-Canisterが提供する関数の名前が`camelCase`形式なのに対し、Rustは一般的に`Snake_case`形式を推奨しているため、コンパイル時に以下のような警告が出ます。
-
-```
-warning: variable `xxx` should have a snake case name
-```
-
-先頭行に以下を入れておくことで、警告を抑止することができます。
-
-```rust
-#![allow(non_snake_case)]
-```
-
 ## 6. Unitテスト
 
-Day1, Day2のようにUnitテストを記述して、`cargo test`を実行したところ、ロジックにICのPrincipal型が含まれることが原因で、「xxxx should only be called inside canisters.」のようなエラーが出ました。
+TODO: IC色のあるUnitテスト方法について後日整理する
+
+[Day1](../day1/README.md), Day2(../day2/README.md)のようにUnitテストを記述して、`cargo test`を実行したところ、ロジックにICのPrincipal型が含まれることが原因で、「xxxx should only be called inside canisters.」のようなエラーが出ました。
 
 ```rust
 #[cfg(test)]
@@ -216,9 +220,6 @@ mod tests {
 ### Test your canister code even in presence of system API calls
 
 https://internetcomputer.org/docs/current/developer-docs/security/rust-canister-development-security-best-practices#test-your-canister-code-even-in-presence-of-system-api-calls
-
-
-TODO: IC色のあるUnitテスト方法について後日整理する
 
 ## 7. Local Canisterの起動
 
