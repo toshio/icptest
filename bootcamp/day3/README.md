@@ -194,7 +194,7 @@ thread_local! {
 
 TODO: IC色のあるUnitテスト方法について後日整理する
 
-[Day1](../day1/README.md), Day2(../day2/README.md)のようにUnitテストを記述して、`cargo test`を実行したところ、ロジックにICのPrincipal型が含まれることが原因で、「xxxx should only be called inside canisters.」のようなエラーが出ました。
+[Day 1](../day1/README.md)や[Day 2](../day2/README.md)のようにUnitテストを記述して`cargo test`を実行したところ、ロジックにICのPrincipal型が含まれることが原因で、「xxxx should only be called inside canisters.」のようなエラーが出ました。
 
 ```rust
 #[cfg(test)]

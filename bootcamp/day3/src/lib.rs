@@ -5,7 +5,7 @@ use ic_cdk::{
         candid::{CandidType, Deserialize},
         Principal,
     },
-    query, update,
+    query, update
 };
 use std::cell::RefCell;
 use std::collections::BTreeMap;
@@ -14,7 +14,7 @@ use std::collections::BTreeMap;
 enum Content {
     Text(String),
     Image(Vec<u8>),
-    Video(Vec<u8>),
+    Video(Vec<u8>)
 }
 
 #[derive(Clone, Debug, CandidType, Deserialize)]
