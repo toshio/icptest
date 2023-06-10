@@ -2,13 +2,13 @@
 
 Canisterが誰から呼ばれたか、という情報はシステムやデータへのアクセス制御を行う上で必要です。
 
-Rust CDKでは、ic_cdk::api::caller()関数を呼び出すことにより呼び出し元を取得することができます。
+Rust CDKでは、`ic_cdk::api::caller()`関数を呼び出すことにより呼び出し元を取得することができます。
 
-[1. Hello](../01_hello/README.md) のサンプルは、パラメータで渡されたname値を「Hello, 〇〇!」の形で返すものでしたが、名前の部分をパラメータで渡された値ではなく、caller()関数から返ってきた値にしてみましょう。
+『[1. Hello](../01_hello/README.md)』のサンプルは、パラメータで渡されたname値を「Hello, 〇〇!」の形で返すものでしたが、名前の部分をパラメータで渡された値ではなく、`caller()`関数から返ってきた値にしてみましょう。
 
-以下の2ファイルを編集しましょう。
+以下の2ファイルを編集しましょう。([dfx.json](dfx.json)と[Cargo.toml](Cargo.toml)は同じでOK)
 
-##### backend.did
+##### [backend.did](backend.did)
 
 ```
 service : {
@@ -16,7 +16,7 @@ service : {
 }
 ```
 
-##### src/lib.rc
+##### [src/lib.rs](src/lib.rs)
 
 ```rust
 #[ic_cdk_macros::query]
@@ -61,7 +61,7 @@ ARGS:
 ︙
 ```
 
-今回の例では、dfx.jsonに記述した「backend」が<CANISTER_NAME>となりますので、以下のように呼び出すと良いでしょう。
+今回の例では、[dfx.json](dfx.json)に記述した「backend」がCanister名となりますので、以下のように呼び出すと良いでしょう。
 
 ```bash
 $ dfx canister call backend greet
@@ -133,4 +133,3 @@ Passphraseは秘密鍵を参照する際に必要なパスワードのような�
 なお、「`--storage-mode=plaintext`」オプションを指定すれば、passphraseなしのpemファイルを出力することも可能です。
 
 ローカルPC環境向けにテスト用にidentityをつくるだけならとくに問題にはなりませんが、本番稼働しているIC Network上でidentityを使用する場合には、秘密鍵の紛失や流出にはくれぐれもご注意下さい。
-
