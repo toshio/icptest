@@ -8,7 +8,7 @@ Internet Computerでは、Dappsの開発言語としてMotoko、Rust、JavaScrip
 
 まず、dfxコマンドなど開発に必要なツールをインストールします。
 
-https://internetcomputer.org/docs/current/developer-docs/setup/install/
+[https://internetcomputer.org/docs/current/developer-docs/setup/install/](https://internetcomputer.org/docs/current/developer-docs/setup/install/)
 
 
 ```bash
@@ -25,6 +25,15 @@ Rust言語は、[Rust公式サイト](https://www.rust-lang.org/tools/install)�
 
 ```bash
 $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+セットアップ後はコマンドにパスが通っていないため、一度ターミナルを終了して起動し直すなど必要な場合があります。
+
+rustcコマンドが通っていればOKです。
+
+```bash
+$ rustc --version
+rustc 1.70.0 (90c541806 2023-05-31)
 ```
 
 ### wasm
