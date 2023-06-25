@@ -104,11 +104,19 @@ service: {
 
 Motokoの[Time](https://internetcomputer.org/docs/current/motoko/main/base/Time)はint (System time is represent as nanoseconds since 1970-01-01.)のようで、Rust言語ではint128でOKと思われます。
 
-#### TODO: Result型
+#### Result型
 
-Local caniterに配備してCandid UIで結果を見ると、motokoの[Result.Result](https://internetcomputer.org/docs/current/motoko/main/base/Result)は`variant {ok:xxx, err:text}`（先頭小文字）となるけど、Rustの[`Result<T, E>`](https://doc.rust-lang.org/std/result/enum.Result.html)は`variant {Ok:xxx, Err:text}` (先頭大文字)の違いがあるようです。
+Local caniterに配備してCandid UIで結果を見ると、motokoの[Result.Result](https://internetcomputer.org/docs/current/motoko/main/base/Result)は`variant {ok:xxx, err:text}`（先頭小文字）となりますが、Rustの[`Result<T, E>`](https://doc.rust-lang.org/std/result/enum.Result.html)は`variant {Ok:xxx, Err:text}` (先頭大文字)の違いがあるようです。
 
-candid定義を Motoko に合わせて、`variant { ok:Homework; err: text }`とするとRust側でResultを返す際にマッピングエラーとなってしまい、[Motoko Bootcamp Day 2](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-2/project/README.MD)に合わせることができず・・・。要調査
+そのため、candid定義を Motoko に合わせて、`variant { ok:Homework; err: text }`とするとRust側でResultを返す際にマッピングエラーとなってしまい、[Motoko Bootcamp Day 2](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-2/project/README.MD)と完全一致とはなりません。
+
+##### 2023/06/23追記:
+
+tokuryoo氏より教えていただいた情報より、MotokoのResultに合わせるためにはRust標準のstd::Resultを使用せず、Motokoに合わせてenum型を用意する必要があるようです。
+
+本ドキュメントではstd::Result型を使用する方法説明しますが、MotokoとI/Fを合わせる場合には、tokuryoo氏の内容が参考になります。
+
+https://github.com/tokuryoo/motokobootcamp-rust-tokuryoo/tree/main/day2/src/day2_backend
 
 ## 5. lib.rsの編集
 
