@@ -73,6 +73,8 @@ dfx.jsonの [canisters] > [day3] > [candid]項目に指定したファイルに�
 
 [Motoko Bootcamp Day3 📺 Interface](https://github.com/motoko-bootcamp/motoko-starter/blob/main/days/day-3/project/README.MD#-interface)に相当するcandidを用意します。
 
+※MotokoのResult (ok, err)とRust標準のResult (Ok, Err)で大文字小文字に違いがあります。MotokoとI/Fを合わせたい場合には別途Result型を定義してください。
+
 ###### [day3.did](day3.did)
 
 ```
@@ -190,6 +192,8 @@ thread_local! {
 }
 ```
 
+※MotokoではHashMapが使われておりますが、ここではgetAllMessages()で順序性を維持できるようBTreeMapを使用しています。
+
 ## 6. Unitテスト
 
 TODO: IC色のあるUnitテスト方法について後日整理する
@@ -219,7 +223,7 @@ mod tests {
 
 ### Test your canister code even in presence of system API calls
 
-https://internetcomputer.org/docs/current/developer-docs/security/rust-canister-development-security-best-practices#test-your-canister-code-even-in-presence-of-system-api-calls
+[https://internetcomputer.org/docs/current/developer-docs/security/rust-canister-development-security-best-practices#test-your-canister-code-even-in-presence-of-system-api-calls](https://internetcomputer.org/docs/current/developer-docs/security/rust-canister-development-security-best-practices#test-your-canister-code-even-in-presence-of-system-api-calls)
 
 ## 7. Local Canisterの起動
 
