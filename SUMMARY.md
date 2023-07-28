@@ -11,8 +11,8 @@
 * [Backend開発](backend/README.md)
   * [1. Hello](backend/01\_hello/README.md)
   * [2. データ更新/参照](backend/02\_update/README.md)
-  * [3. ic_cdk::api::caller()](backend/03\_caller/README.md)
-  * [4. ic_cdk::call()](backend/04\_intercall/README.md)
+  * [3. ic\_cdk::api::caller()](backend/03\_caller/README.md)
+  * [4. ic\_cdk::call()](backend/04\_intercall/README.md)
 * [Bootcamp](bootcamp/README.md)
   * [Calculator ➕✖️➖➗](bootcamp/day1/README.md)
   * [Homework diary 📔](bootcamp/day2/README.md)
@@ -23,9 +23,9 @@
 
 ## ツール <a href="#tools" id="tools"></a>
 
-* [dfx](/tools/dfx.md)
-* [quill](/tools/quill.md)
+* [dfx](tools/dfx.md)
+* [quill](tools/quill.md)
 
 ## 参考情報 <a href="#reference" id="reference"></a>
 
-* [リンク集](link.md)
+* [🔗 リンク集](reference/rinku.md)
