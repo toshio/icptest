@@ -68,6 +68,14 @@ $ dfx canister call backend greet
 ("Hello, xxxxx-xxxxx-…-xxxxx!")
 ```
 
+## 別のidentityによる呼び出し
+
+使用している環境に複数のidentityが登録されている場合、`--identity`オプションで指定したidentityでcanisterを呼び出すことができます。
+
+```bash
+$ dfx canister call --identity <identitiy名> backend greet
+```
+
 ## 別のidentity作成
 
 Candidからの呼び出した場合とdfxコマンドからの呼び出した場合で、callerが異なることを確認できました。
