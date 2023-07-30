@@ -28,4 +28,4 @@
 
 ## 参考情報 <a href="#reference" id="reference"></a>
 
-* [🔗 リンク集](reference/rinku.md)
+* [🔗 リンク集](reference/link.md)
