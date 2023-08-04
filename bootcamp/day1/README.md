@@ -26,10 +26,10 @@ day1
 
 ### (1) IC関連ライブラリ追加
 
-[ic-cdk](https://docs.rs/ic-cdk/latest/ic\_cdk/)と[ic-cdk-macros](https://docs.rs/ic-cdk-macros/latest/ic\_cdk\_macros/)ライブラリを使用します。最新バージョンでよいかと思いますので、以下のように実行ます。
+[ic-cdk](https://docs.rs/ic-cdk/latest/ic\_cdk/)を使用します。最新バージョンでよいかと思いますので、以下のように実行ます。
 
 ```bash
-$ cargo add ic-cdk ic-cdk-macros
+$ cargo add ic-cdk
 ```
 
 ### (2) crate-type設定
@@ -123,7 +123,7 @@ thread_local! {
     static COUNTER: RefCell<f64> = RefCell::new(0f64);
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn add(x: f64) -> f64 {
     COUNTER.with(|counter| {
         let mut c = counter.borrow_mut();

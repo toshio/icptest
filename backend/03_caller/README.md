@@ -1,10 +1,10 @@
-# 3. ic_cdk::api::caller()
+# 3. ic_cdk::caller()
 
 Canisterが誰から呼ばれたかという情報はシステムやデータへのアクセス制御を行う上で必要です。
 
-Rust CDKでは、`ic_cdk::api::caller()`関数を呼び出すことにより呼び出し元を取得することができます。
+Rust CDKでは、`ic_cdk::caller()`関数を呼び出すことにより呼び出し元を取得することができます。
 
-『[1. Hello](../01_hello/README.md)』のサンプルは、パラメータで渡されたname値を「Hello, 〇〇!」の形で返すものでしたが、名前の部分をパラメータで渡された値ではなく、`ic_cdk::api::caller()`関数から返ってきた値にしてみましょう。
+『[1. Hello](../01_hello/README.md)』のサンプルは、パラメータで渡されたname値を「Hello, 〇〇!」の形で返すものでしたが、名前の部分をパラメータで渡された値ではなく、`ic_cdk::caller()`関数から返ってきた値にしてみましょう。
 
 以下の2ファイルを編集しましょう。([dfx.json](dfx.json)と[Cargo.toml](Cargo.toml)は同じでOK)
 
@@ -19,9 +19,9 @@ service : {
 ##### [src/lib.rs](src/lib.rs)
 
 ```rust
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 fn greet() -> String {
-    let caller = ic_cdk::api::caller();
+    let caller = ic_cdk::caller();
     format!("Hello, {}!", caller)
 }
 ```

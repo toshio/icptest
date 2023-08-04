@@ -108,7 +108,7 @@ crate-type = ["cdylib"]
 #### b. dependencies追加
 
 ```bash
-$ cargo add candid ic-cdk ic-cdk-macros serde serde_derive
+$ cargo add candid ic-cdk serde
 ```
 
 ### (3) [src/publisher/src/publisher.did](src/publisher/src/publisher.did)作成
@@ -194,7 +194,7 @@ crate-type = ["cdylib"]
 #### b. dependencies追加
 
 ```bash
-$ cargo add candid ic-cdk ic-cdk-macros serde serde_derive
+$ cargo add candid ic-cdk serde
 ```
 
 ### (3) [src/subscriber/src/subscriber.did](src/subscriber/src/subscriber.did)作成

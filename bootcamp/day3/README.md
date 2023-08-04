@@ -24,10 +24,10 @@ day3
 
 ### (1) IC関連ライブラリ追加
 
-[ic-cdk](https://docs.rs/ic-cdk/latest/ic\_cdk/)と[ic-cdk-macros](https://docs.rs/ic-cdk-macros/latest/ic\_cdk\_macros/)ライブラリを使用します。最新バージョンでよいかと思いますので、以下のように実行ます。
+[ic-cdk](https://docs.rs/ic-cdk/latest/ic\_cdk/)ライブラリを使用します。最新バージョンでよいかと思いますので、以下のように実行ます。
 
 ```bash
-$ cargo add candid ic-cdk ic-cdk-macros serde
+$ cargo add candid ic-cdk serde
 ```
 
 ### (2) crate-type設定

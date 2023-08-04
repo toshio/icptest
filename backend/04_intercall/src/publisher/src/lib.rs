@@ -1,5 +1,4 @@
 use candid::{CandidType, Principal};
-use ic_cdk_macros::*;
 use serde::Deserialize;
 use std::cell::RefCell;
 use std::collections::BTreeMap;
@@ -21,7 +20,7 @@ struct Subscriber {
     topic: String,
 }
 
-#[update]
+#[ic_cdk::update]
 fn subscribe(subscriber: Subscriber) {
     let subscriber_principal_id = ic_cdk::caller();
     SUBSCRIBERS.with(|subscribers| {
@@ -31,7 +30,7 @@ fn subscribe(subscriber: Subscriber) {
     });
 }
 
-#[update]
+#[ic_cdk::update]
 async fn publish(counter: Counter) {
     SUBSCRIBERS.with(|subscribers| {
         for (k, v) in subscribers.borrow().iter() {

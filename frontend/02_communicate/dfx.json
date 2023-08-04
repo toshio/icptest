@@ -1,0 +1,30 @@
+{
+  "canisters": {
+    "icptest_backend": {
+      "candid": "src/icptest_backend/icptest_backend.did",
+      "package": "icptest_backend",
+      "type": "rust"
+    },
+    "icptest_frontend": {
+      "dependencies": [
+        "icptest_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/icptest_frontend/src/index.html"
+      },
+      "source": [
+        "src/icptest_frontend/assets",
+        "dist/icptest_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

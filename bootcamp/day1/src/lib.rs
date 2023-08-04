@@ -4,7 +4,7 @@ thread_local! {
     static COUNTER: RefCell<f64> = RefCell::new(0f64);
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn add(x: f64) -> f64 {
     COUNTER.with(|counter| {
         let mut c = counter.borrow_mut();
@@ -13,7 +13,7 @@ fn add(x: f64) -> f64 {
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn sub(x: f64) -> f64 {
     COUNTER.with(|counter| {
         let mut c = counter.borrow_mut();
@@ -22,7 +22,7 @@ fn sub(x: f64) -> f64 {
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn mul(x: f64) -> f64 {
     COUNTER.with(|counter| {
         let mut c = counter.borrow_mut();
@@ -31,7 +31,7 @@ fn mul(x: f64) -> f64 {
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn div(x: f64) -> Option<f64> {
     if x == 0.0 {
         None
@@ -44,21 +44,21 @@ fn div(x: f64) -> Option<f64> {
     }
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn reset() {
     COUNTER.with(|counter| {
         *counter.borrow_mut() = 0.0
     })
 }
 
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 fn see() -> f64 {
     COUNTER.with(|counter| {
         counter.borrow().clone()
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn power(x: f64) -> f64 {
     COUNTER.with(|counter| {
         let mut c = counter.borrow_mut();
@@ -67,7 +67,7 @@ fn power(x: f64) -> f64 {
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn sqrt() -> f64 {
     COUNTER.with(|counter| {
         let mut c = counter.borrow_mut();
@@ -76,7 +76,7 @@ fn sqrt() -> f64 {
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn floor() -> i128 {
     COUNTER.with(|counter| {
         let mut c = counter.borrow_mut();

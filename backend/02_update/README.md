@@ -67,9 +67,8 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-candid = "0.8.4"
-ic-cdk = "0.7.4"
-ic-cdk-macros = "0.6.10"
+candid = "0.9.3"
+ic-cdk = "0.10.0"
 ```
 
 ##### [src/lib.rs](src/lib.rs)
@@ -83,14 +82,14 @@ thread_local! {
     static VALUE: RefCell<String> = RefCell::default();
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 fn set(text: String) {
     VALUE.with(|value| {
         *value.borrow_mut() = text;
     });
 }
 
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 fn get() -> String {
     VALUE.with(|value| {
         value.borrow().clone()
@@ -106,11 +105,11 @@ fn get() -> String {
 
 ### (1) set()関数
 
-サンプルプログラム内で定義している`set()`関数は、更新系処理となるため、Outer attributeに`ic_cdk_macros::update`を指定します。
+サンプルプログラム内で定義している`set()`関数は、更新系処理となるため、Outer attributeに`ic_cdk::update`を指定します。
 
 ### (2) get()関数
 
-サンプルプログラム内で定義した`set()`関数は、get()関数は、更新系処理となるため、Outer attributeに`ic_cdk_macros::query`を指定します。
+サンプルプログラム内で定義した`set()`関数は、get()関数は、更新系処理となるため、Outer attributeに`ic_cdk::query`を指定します。
 
 ### (3) thread_local
 

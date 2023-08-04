@@ -1,8 +1,4 @@
-use ic_cdk::{
-    export::{
-        candid::{CandidType, Deserialize},
-    }
-};
+use candid::{CandidType, Deserialize};
 use std::cell::RefCell;
 
 #[derive(Clone, Debug, CandidType, Deserialize)]
@@ -18,7 +14,7 @@ thread_local! {
     static HOMEWORK_DIARY: RefCell<Vec<Homework>> = RefCell::new(Vec::new());
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 #[allow(non_snake_case)]
 fn addHomework(homework: Homework) -> u128 {
     HOMEWORK_DIARY.with(|homework_diary| {
@@ -28,7 +24,7 @@ fn addHomework(homework: Homework) -> u128 {
     })
 }
 
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 #[allow(non_snake_case)]
 fn getHomework(id: u128) -> Result<Homework, String> {
     HOMEWORK_DIARY.with(|homework_diary| {
@@ -41,7 +37,7 @@ fn getHomework(id: u128) -> Result<Homework, String> {
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 #[allow(non_snake_case)]
 fn updateHomework(id: u128, homework: Homework) -> Result<(), String> {
     HOMEWORK_DIARY.with(|homework_diary| {
@@ -59,7 +55,7 @@ fn updateHomework(id: u128, homework: Homework) -> Result<(), String> {
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 #[allow(non_snake_case)]
 fn markAsCompleted(id: u128) -> Result<(), String> {
     HOMEWORK_DIARY.with(|homework_diary| {
@@ -74,7 +70,7 @@ fn markAsCompleted(id: u128) -> Result<(), String> {
     })
 }
 
-#[ic_cdk_macros::update]
+#[ic_cdk::update]
 #[allow(non_snake_case)]
 fn deleteHomework(id: u128) -> Result<(), String> {
     HOMEWORK_DIARY.with(|homework_diary| {
@@ -89,7 +85,7 @@ fn deleteHomework(id: u128) -> Result<(), String> {
 }
 
 
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 #[allow(non_snake_case)]
 fn getAllHomework() -> Vec<Homework> {
     HOMEWORK_DIARY.with(|homework_diary| {
@@ -99,7 +95,7 @@ fn getAllHomework() -> Vec<Homework> {
 }
 
 
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 #[allow(non_snake_case)]
 fn getPendingHomework() -> Vec<Homework> {
     HOMEWORK_DIARY.with(|homework_diary| {
@@ -113,7 +109,7 @@ fn getPendingHomework() -> Vec<Homework> {
 }
 
 
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 #[allow(non_snake_case)]
 fn searchHomework(search_term: String) -> Vec<Homework> {
     HOMEWORK_DIARY.with(|homework_diary| {

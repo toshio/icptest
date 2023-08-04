@@ -82,7 +82,7 @@ crate-type = ["cdylib"]
 #### b. dependencies追加
 
 ```bash
-$ cargo add candid ic-cdk ic-cdk-macros
+$ cargo add candid ic-cdk
 ```
 
 ### (4) Cargo.lock作成
@@ -98,7 +98,7 @@ $ cargo generate-lockfile
 ##### [src/lib.rs](src/lib.rs)
 
 ```rust
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 fn greet(name: String) -> String {
     format!("Hello, {}!", name)
 }
