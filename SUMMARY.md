@@ -8,7 +8,7 @@
 * [テンプレート生成 (dfx new)](template.md)
 * [Frontend開発](frontend/README.md)
   * [1. シンプルなHTML](frontend/01\_simple/README.md)
-  * [2. Canister呼び出し](frontend/02\_update/README.md)
+  * [2. Canister呼び出し](frontend/02\_communicate/README.md)
 * [Backend開発](backend/README.md)
   * [1. Hello](backend/01\_hello/README.md)
   * [2. データ更新/参照](backend/02\_update/README.md)
