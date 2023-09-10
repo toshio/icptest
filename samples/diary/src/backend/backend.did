@@ -1,0 +1,45 @@
+
+type Date = nat32; // YYYYYMMDD
+type EpocNano = nat64; // ic_cdk::api::time()
+
+type Diary = record {
+  date: Date;
+  title: text;
+  content: text;
+  created: EpocNano;
+  updated: EpocNano;
+};
+
+type Header = record {
+  date: Date;
+  title: text;
+};
+
+type ResultDiary = variant {
+  Ok: Diary;
+  Err: text;
+};
+
+type UserConfig = record {
+  public: bool;
+  name: text;
+  title: text;
+  description: text;
+};
+
+type ResultUserConfig = variant {
+  Ok: UserConfig;
+  Err: text;
+};
+
+service : {
+  /* User */
+  set: (UserConfig) -> (ResultUserConfig);
+  get: (principal) -> (ResultUserConfig) query;
+
+  /* Diary */
+  save: (Diary) -> (ResultDiary);
+  delete: (Date) -> (ResultDiary);
+  load: (principal, Date) -> (ResultDiary) query;
+  list: (principal) -> (vec Header) query;
+};

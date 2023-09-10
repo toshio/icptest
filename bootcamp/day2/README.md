@@ -112,11 +112,11 @@ Local caniterに配備してCandid UIで結果を見ると、motokoの[Result.Re
 
 ##### 2023/06/23追記:
 
-tokuryoo氏より教えていただいた情報より、MotokoのResultに合わせるためにはRust標準のstd::Resultを使用せず、Motokoに合わせてenum型を用意する必要があるようです。
+[tokuryoo](https://x.com/tokuryoo)氏より教えていただいた情報より、MotokoのResultに合わせるためにはRust標準のstd::Resultを使用せず、Motokoに合わせてenum型を用意する必要があるようです。
 
-本ドキュメントではstd::Result型を使用する方法説明しますが、MotokoとI/Fを合わせる場合には、tokuryoo氏の内容が参考になります。
+本ドキュメントではstd::Result型を使用する方法説明しますが、MotokoとI/Fを合わせる場合には、[tokuryoo](https://x.com/tokuryoo)氏の内容が参考になります。
 
-https://github.com/tokuryoo/motokobootcamp-rust-tokuryoo/tree/main/day2/src/day2_backend
+[https://github.com/tokuryoo/motokobootcamp-rust-tokuryoo/tree/main/day2/src/day2_backend](https://github.com/tokuryoo/motokobootcamp-rust-tokuryoo/tree/main/day2/src/day2_backend)
 
 ## 5. lib.rsの編集
 
