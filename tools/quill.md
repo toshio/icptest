@@ -1,12 +1,12 @@
 # quill
 
-https://internetcomputer.org/docs/current/references/quill-cli-reference/
+[https://internetcomputer.org/docs/current/references/quill-cli-reference/](https://internetcomputer.org/docs/current/references/quill-cli-reference/)
 
 ## インストール方法
 
 以下のURLから最新モジュールをダウンロードします。
 
-https://github.com/dfinity/quill/releases
+[https://github.com/dfinity/quill/releases](https://github.com/dfinity/quill/releases)
 
 |モジュール              |
 |:-----------------------|
