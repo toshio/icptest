@@ -21,7 +21,7 @@
   * [MotoCoin 🪙](bootcamp/day4/README.md)
   * [The Verifier 👨‍🏫](bootcamp/day5/README.md)
   * [The Dapp 🚀](bootcamp/day6/README.md)
-* [サンプル](bootcamp/README.md)
+* [サンプル](sample/README.md)
   * [Diary](sample/diary/README.md)
 * [技術情報](tips/README.md)
   * [Principal](tips/principal.md)
