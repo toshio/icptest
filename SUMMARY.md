@@ -21,14 +21,15 @@
   * [MotoCoin 🪙](bootcamp/day4/README.md)
   * [The Verifier 👨‍🏫](bootcamp/day5/README.md)
   * [The Dapp 🚀](bootcamp/day6/README.md)
-* [技術情報](development/ji-shu-qing-bao/README.md)
-  * [Principal](tips/principal.md)
-  * [VetKey](tips/vetKey.md)
 
-***
+## サンプル <a href="#samples" id="samples"></a>
 
-* [サンプル](samples/README.md)
-  * [📔 Diary](samples/diary.md)
+* [📔 Diary](samples/diary/README.md)
+
+## 技術情報 <a href="#tips" id="tips"></a>
+
+* [Principal](tips/principal.md)
+* [VetKey](tips/vetKey.md)
 
 ## ツール <a href="#tools" id="tools"></a>
 

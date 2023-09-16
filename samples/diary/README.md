@@ -1,4 +1,4 @@
-# Diary
+# 📔 Diary
 
 Rust CDKの学習を兼ねて簡単なDiary Dappをつくってみることにします。
 
