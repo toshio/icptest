@@ -27,8 +27,8 @@
 
 ***
 
-* [サンプル](sample/README.md)
-  * [📔 Diary](sample/diary.md)
+* [サンプル](samples/README.md)
+  * [📔 Diary](samples/diary.md)
 
 ## ツール <a href="#tools" id="tools"></a>
 
