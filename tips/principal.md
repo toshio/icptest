@@ -4,7 +4,7 @@ Internet Computerには、Principalという識別子があります。
 
 Principalによって、Canisterを呼び出したユーザーや別のCanisterを識別することができます。
 
-Principalは、ユーザーの公開鍵（または秘密鍵）から導出されますが、どのように組み立てられているかの解説がありますので、実際に検証してみることにします。
+Principalはユーザーの公開鍵（または秘密鍵）から導出されますが、どのように組み立てられているかアルゴリズムの解説サイトがありましたので、実際に検証してみることにします。
 
 [https://5n2bt-lqaaa-aaaae-aajfa-cai.raw.icp0.io/](https://5n2bt-lqaaa-aaaae-aajfa-cai.raw.icp0.io/)
 
@@ -12,9 +12,13 @@ Principalは、ユーザーの公開鍵（または秘密鍵）から導出さ�
 
 ## Principalの導出
 
-dfxコマンドを使っている方であれば、defaultのIdentityが `~/.config/dfx/identity/default/identity.pem` に格納されているかと思います。
+dfxコマンドを使っている方であれば、defaultのIdentityが以下に格納されているかと思います。
 
-例えば自分のテスト環境ですと、以下のようなPrincipalになりますので、秘密鍵 → 公開鍵 → Principalという流れで、求めてみることにします。
+```bash
+~/.config/dfx/identity/default/identity.pem
+```
+
+自分のテスト環境では、以下のPrincipalでしたので、この値を 秘密鍵 → 公開鍵 → Principal という流れで求めてみることにします。
 
 ```bash
 $ dfx identity get-principal
@@ -27,7 +31,7 @@ rjfvh-5kjv6-svpk2-vf3sl-h24gi-qwmfe-22o2e-jcxqg-im5h6-2apbx-hqe
 $ openssl ec -in ~/.config/dfx/identity/default/identity.pem -pubout -outform DER
 ```
 
-中身はバイナリですので、中身を確認したい場合は、`| hexdump -C`のようにパイプでつなげるとよいでしょう。
+バイナリですので、中身を確認したい場合は`| hexdump -C`のようにパイプでつなげるとよいでしょう。
 
 ### (2) sha224sum
 
