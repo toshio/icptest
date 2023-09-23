@@ -6,6 +6,8 @@ Principalによって、Canisterを呼び出したユーザーや別のCanister�
 
 Principalはユーザーの公開鍵（または秘密鍵）から導出されますが、どのように組み立てられているかアルゴリズムの解説サイトがありましたので、実際に検証してみることにします。
 
+## 参照元情報
+
 [https://5n2bt-lqaaa-aaaae-aajfa-cai.raw.icp0.io/](https://5n2bt-lqaaa-aaaae-aajfa-cai.raw.icp0.io/)
 
 >We convert a DER public key to a principal IDs by computing its SHA224 hash then appending the byte 02, indicating a self-authenticating ID in Internet Computer parlance. Like other principal IDs, we can cook self-authenticating IDs by prepending a CRC32 checksum, encoding with base32, and inserting dashes. Some tools expect these
