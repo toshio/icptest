@@ -2,55 +2,96 @@
 
 Internet Computerには、Principalという識別子があります。
 
-★TODO★
+Principalによって、Canisterを呼び出したユーザーや別のCanisterを識別することができます。
+
+Principalは、ユーザーの公開鍵（または秘密鍵）から導出されますが、どのように組み立てられているかの解説がありますので、実際に検証してみることにします。
 
 [https://5n2bt-lqaaa-aaaae-aajfa-cai.raw.icp0.io/](https://5n2bt-lqaaa-aaaae-aajfa-cai.raw.icp0.io/)
 
->SHA-224: Used to derive principal IDs from DER-encoded public keys, and to derive account IDs from principal IDs.
-
->base32: Used to cook raw principal IDs to make them friendlier to humans.
-
-## 秘密鍵
-
-dfxコマンドで
-
-```bash
-$ cat ~/.config/dfx/identity/default/identity.pem 
-```
-
-## 公開鍵の導出
-
-```bash
-$ openssl ec -in ~/.config/dfx/identity/default/identity.pem -pubout
-read EC key
-writing EC key
------BEGIN PUBLIC KEY-----
-MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEjY+D2FbXMd2Rboh7fPVrCM8PD2/pr7Tf
-kRu50wo9Ugf9cp6/oqJOgB8ik8hKt0ip494rp6yvA5czH03jlDknuw==
------END PUBLIC KEY-----
-```
-
-## 公開鍵の詳細
-
-```bash
-$ openssl ec -in ~/.config/dfx/identity/default/identity.pem -noout -text
-```
-
-```bash
-openssl ec -in ~/.config/dfx/identity/default/identity.pem -pubout | openssl ec -pubin -noout -text
-read EC key
-read EC key
-writing EC key
-Public-Key: (256 bit)
-pub:
-    04:8d:8f:83:d8:56:d7:31:dd:91:6e:88:7b:7c:f5:
-    6b:08:cf:0f:0f:6f:e9:af:b4:df:91:1b:b9:d3:0a:
-    3d:52:07:fd:72:9e:bf:a2:a2:4e:80:1f:22:93:c8:
-    4a:b7:48:a9:e3:de:2b:a7:ac:af:03:97:33:1f:4d:
-    e3:94:39:27:bb
-ASN1 OID: secp256k1
-```
+>We convert a DER public key to a principal IDs by computing its SHA224 hash then appending the byte 02, indicating a self-authenticating ID in Internet Computer parlance. Like other principal IDs, we can cook self-authenticating IDs by prepending a CRC32 checksum, encoding with base32, and inserting dashes. Some tools expect these
 
 ## Principalの導出
 
-★TODO★
+dfxコマンドを使っている方であれば、defaultのIdentityが `~/.config/dfx/identity/default/identity.pem` に格納されているかと思います。
+
+例えば自分のテスト環境ですと、以下のようなPrincipalになりますので、秘密鍵 → 公開鍵 → Principalという流れで、求めてみることにします。
+
+```bash
+$ dfx identity get-principal
+rjfvh-5kjv6-svpk2-vf3sl-h24gi-qwmfe-22o2e-jcxqg-im5h6-2apbx-hqe
+```
+
+### (1) 秘密鍵(PEM形式)から公開鍵(DER形式)を出力
+
+```bash
+$ openssl ec -in ~/.config/dfx/identity/default/identity.pem -pubout -outform DER
+```
+
+中身はバイナリですので、中身を確認したい場合は、`| hexdump -C`のようにパイプでつなげるとよいでしょう。
+
+### (2) sha224sum
+
+公開鍵(DER形式)のsha224ハッシュを求めます。
+
+```bash
+$ openssl ec -in ~/.config/dfx/identity/default/identity.pem -pubout -outform DER | sha224sum | cut -d ' ' -f 1
+49afa557ab552ee4b3eb86442cc2935a7688915e06433a7f680f0dcf
+```
+
+### (3) 末尾に'02'追加 (Principal ID raw)
+
+```bash
+$ openssl ec -in ~/.config/dfx/identity/default/identity.pem -pubout -outform DER | sha224sum | cut -d ' ' -f 1 | sed s/$/02/
+49afa557ab552ee4b3eb86442cc2935a7688915e06433a7f680f0dcf02
+```
+
+末尾に付与するbyteは以下のようです。
+
+|byte|Description                        |
+|:---|:----------------------------------|
+|0x01|canister                           |
+|0x02|public key (self-authenticating ID)|
+|0x04|anonymous                          |
+
+### (4) CRC32計算
+
+Principal ID (raw)のCRC32を計算します。
+
+```
+$ echo -n 49afa557ab552ee4b3eb86442cc2935a7688915e06433a7f680f0dcf02 | xxd -r -p |python3 -c 'import sys;import zlib;print("{:x}".format(zlib.crc32(sys.stdin.buffer.read())%(1<<32)))' 
+8a4b53f5
+```
+
+### (5) 先頭にCRC32を追加してBase32
+
+CRC32値 (`8a4b53f`)をPrincipal ID (raw)の先頭に追加した値をBase32エンコードします。
+
+```bash
+echo -n 8a4b53f549afa557ab552ee4b3eb86442cc2935a7688915e06433a7f680f0dcf02 | xxd -r -p | base32
+RJFVH5KJV6SVPK2VF3SLH24GIQWMFE22O2EJCXQGIM5H62APBXHQE===
+```
+
+### (6) 小文字化して、5桁ずつ区切る
+
+Base32エンコード値を見やすいように整形します。
+
+```bash
+$ echo -n 8a4b53f549afa557ab552ee4b3eb86442cc2935a7688915e06433a7f680f0dcf02 | xxd -r -p | base32 | tr A-Z a-z | tr -d "=" | sed -E 's/(.{5})/\1-/g'
+rjfvh-5kjv6-svpk2-vf3sl-h24gi-qwmfe-22o2e-jcxqg-im5h6-2apbx-hqe
+```
+
+## Principal導出スクリプト
+
+上記の内容をまとめたスクリプトを用意してみました。
+
+[derivePrincipal.sh](derivePrincipal.sh)
+
+### 使用方法
+
+```bash
+$ bash derivePrincipal.sh <ECDSA private pem file>
+```
+
+あくまでも学習目的で用意したものにすぎませんので内容は保証しません。
+
+実際の運用では、公式の`dfx identity get-principal`コマンドなどをお使いください。
