@@ -36,6 +36,8 @@ $ dfx deploy backend
 
 ## Frontend
 
+★TODO★
+
 ### Generate I/F
 
 Frontendから利用できるようにソースファイルを生成します。
