@@ -28,8 +28,10 @@
 
 ## 技術情報 <a href="#tips" id="tips"></a>
 
-* [Principal](tips/principal.md)
-* [VetKey](tips/vetKey.md)
+* [🪪 Principal](tips/principal.md)
+* [🗝️ VetKey](tips/vetKey.md)
+* [🪙 Token](tips/token.md)
+* [🖼️ NFT](tips/NFT.md)
 
 ## ツール <a href="#tools" id="tools"></a>
 

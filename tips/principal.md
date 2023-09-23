@@ -1,4 +1,4 @@
-# Principal
+# 🪪 Principal
 
 Internet Computerには、Principalという識別子があります。
 

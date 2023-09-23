@@ -1,4 +1,4 @@
-# vetKey
+# 🗝️ vetKey
 
 vetKey (Verifiably Encrypted Threshold Key)は、Internet Computerにおいて、onchain encryptionを実現するために現在（2023年09月時点）開発中の機能です。
 
