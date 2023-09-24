@@ -13,6 +13,17 @@ $ dfx new --type=rust icptest
 $ cd icptest/
 ```
 
+##### 補足
+
+以下の記事より、`dfx new`コマンドは、v0.15.1で大幅なアップデートがある予定で、Motoko、Rust以外に、Azle (JavaScript)やKybra (Python)も利用できるようになるとのことです。また、FrontendのテンプレートもReact、Vue、Unit Testの有無、Internet Identityなども選べるようになるようですので、リリースされ次第記事を更新します。
+
+https://internetcomputer.org/blog/2023/09/01/news-and-updates/update
+
+>The dfx new command has some exciting updates and improvements that will be coming out in dfx release 0.15.1. One of the biggest changes is that there will be an interactive prompt that will allow you to choose what language template you'd like to create a new project using. Previously, this decision was made using the flag --type=motoko or --type=rust. Additionally, there will be additional options through this new interactive prompt, such as Azle and Kybra.
+
+>In this interactive prompt, there are also options to enable add-ons, such as adding a frontend canister using different frontend templates like React or Vue, enabling unit tests, or adding integrations like Internet Identity and Bitcoin.
+
+
 ## ローカル環境でのCanister起動
 
 Dapps開発時は本番環境に配備する必要はなく、ローカルPC内に配備します。
