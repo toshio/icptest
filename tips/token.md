@@ -92,12 +92,14 @@ $ dfx start --background --clean
 $ bash deploy_token.sh
 ```
 
-## その他資料
+### (6) deploy
 
-### ic-js
+$ dfx start --background --clean
 
-https://github.com/dfinity/ic-js
+## その他情報
 
-#### ledger
+### The Internet Computer Token Standards: A Comparison
 
-https://github.com/dfinity/ic-js/tree/main/packages/ledger
+Fungible Tokenの規格として、ICRC-1以外にも、IS20、DIP20、EXTといった規格があるようです。
+
+https://www.blog.bitfinity.network/the-internet-computer-token-standards-a-comparison/
