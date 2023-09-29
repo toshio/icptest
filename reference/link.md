@@ -21,3 +21,5 @@
 * [The Rust Programming Language](https://doc.rust-lang.org/book/) （[日本語版](https://doc.rust-jp.rs/book-ja/)）
 * [Comprehensive Rust 🦀](https://google.github.io/comprehensive-rust/)
 * [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
+* [Rust API guidelines](https://github.com/rust-lang/api-guidelines) ([非公式日本語訳](https://sinkuu.github.io/api-guidelines/about.html))
+* [Elegant Library APIs in Rust](https://deterministic.space/elegant-apis-in-rust.html)
