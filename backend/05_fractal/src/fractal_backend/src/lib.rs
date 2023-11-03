@@ -40,5 +40,5 @@ fn fractal(imgx:u32, imgy:u32) -> Vec<u8> {
 
   let mut result = vec![];
   imgbuf.write_to(&mut Cursor::new(&mut result), image::ImageOutputFormat::Png).unwrap();
-  return result;
+  result
 }

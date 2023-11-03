@@ -70,11 +70,13 @@ service : {
 
 I/Fに合わせてプログラムを用意します。
 
-今回はBackendで動的に画像を生成する方法の確認が目的ですので、生成する画像にはこだわりません。
+今回はBackendで動的に画像を生成する方法の検証が目的ですので、生成する画像にはこだわりません。
 
 使用するimage createのページを見ると『Julia fractals』のコード例がありましたので、今回はこれを使ってみることにしましょう。
 
 -[https://crates.io/crates/image](https://crates.io/crates/image)
+
+描画ロジックの詳細については聞かないでください。
 
 ##### [src/fractal_backend/src/lib.rs](src/fractal_backend/src/lib.rs)
 
@@ -88,7 +90,7 @@ fn fractal(imgx:u32, imgy:u32) -> Vec<u8> {
   ︙
   let mut result = vec![];
   imgbuf.write_to(&mut Cursor::new(&mut result), image::ImageOutputFormat::Png).unwrap();
-  return result;
+  result
 }
 ```
 
