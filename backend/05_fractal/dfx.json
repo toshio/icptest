@@ -1,0 +1,30 @@
+{
+  "canisters": {
+    "fractal_backend": {
+      "candid": "src/fractal_backend/fractal_backend.did",
+      "package": "fractal_backend",
+      "type": "rust"
+    },
+    "fractal_frontend": {
+      "dependencies": [
+        "fractal_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/fractal_frontend/src/index.html"
+      },
+      "source": [
+        "src/fractal_frontend/assets",
+        "dist/fractal_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

@@ -1,0 +1,3 @@
+service : {
+    "fractal": (nat32, nat32) -> (blob) query;
+}
