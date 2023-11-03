@@ -4,11 +4,13 @@ Internet ComputerのBackend Canisterで動的に画像生成してみます。
 
 ここで解説するサンプルは、Frontendから渡した画像サイズをもとにBackendで動的に画像データを生成して返すだけのシンプルなものです。
 
-サンプルの画像生成にはBackend側のデータを利用しないため、実際にはBackendを呼び出さずともFrontend内で生成できますが、Backendで生成する仕組みを応用することで、Blockchainに刻まれたデータに基づいて動的に画像データを生成するといった使い方もできるでしょう。
+生成画像はBackend側のデータを利用しないため、厳密にはBackendを呼び出さずともFrontend内で生成可能なのですが、あえてBackendで動的生成させています。
+
+Backendで動的に画像生成する仕組みを応用することで、Blockchainに刻まれたデータに基づいて動的に画像データを生成するといったこともできるでしょう。
 
 ## 1. テンプレート生成
 
-今回はBackendだけでなく、生成した画像を表示するFrontendも用意しますので、手っ取り早くテンプレート生成を使うことにします。
+生成した画像を表示するためのFrontendも用意しますので、手っ取り早くテンプレート生成を使うことにします。
 
 ```bash
 $ dfx new --type=rust fractal
@@ -120,11 +122,9 @@ image = { version = "0.24.7", default-features = false, features = ["png"] }
 num-complex = "0.4.4"
 ```
 
-
-
 ### (5) Backend呼び出し用のJavaScriptソース生成
 
-FrontendからBackendを呼び出せるよう、JavaScriptソースを生成します。
+FrontendからBackendを呼び出せるようにJavaScriptソースを生成します。
 
 ```bash
 $ npm run generate
@@ -134,7 +134,7 @@ $ npm run generate
 
 ### (6) index.htmlの編集
 
-あくまでもサンプルですので、画像サイズ (x, y) を入力する`<input>`タグ、画像生成する`<button>`タグ、、生成した画像を表示させる`<img>`タグ のみのシンプルなものとします。
+あくまでもサンプルですので、画像サイズ (x, y) を入力する`<input>`タグ、画像生成する`<button>`タグ、生成した画像を表示させる`<img>`タグ のみのシンプルなものとし、素のHTMLとJavaScriptで記述することにします。
 
 ```html
 <!DOCTYPE html>
