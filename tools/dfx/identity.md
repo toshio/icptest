@@ -1,10 +1,7 @@
-# dfx
+# dfx identity
 
-TODO
 
-## identity
-
-### 登録済identity一覧
+## 登録済identity一覧
 
 ```bash
 $ dfx identity list
@@ -12,7 +9,7 @@ anonymous
 default *
 ```
 
-### identity登録
+## identity登録
 
 新たにIdentityを作成します。
 
@@ -33,16 +30,27 @@ passphraseで暗号化されているため、dfxコマンドの実行時にiden
 
 ### 非暗号化pemファイル
 
-passphraseで暗号化されていないそのままのpemファイルを生成したい場合には、上記コマンドに`--disable-encryption`を付与することで、暗号化されていないpemファイルを生成することもできます。
+passphraseで暗号化されていないそのままのpemファイルを生成したい場合には、上記コマンドに`--storage-mode=plaintext`を付与することで、暗号化されていないpemファイルを生成することもできます。
 
 ### seed phase
 
 コマンド実行結果にはseed phraseも表示されていますので、漏洩や紛失の無いようしっかり保管しておきましょう。seed phaseがあれば、pemファイルを復元することができます。
 
-## 使用するidentityの切り替え
+## identityの切り替え
 
 dfxコマンドでは、引数に`--identity <identity-name>`と指定すれば、コマンド毎にidentityを切り替えることができます。毎回identityを指定するのが手間な場合には、以下のように実行することで、`--identity`省略時に使用するidentityを切り替えることができます。
 
 ```bash
 $ dfx identity use <identity-name>
 ```
+
+## Principalの表示
+
+identityに紐づいているPrincipalを表示します。
+
+```bash
+$ dfx identity get-principal
+xxxxx-xxxxx-xxxxx-xxxxx-xxxxx-xxxxx-xxxxx-xxxxx-xxxxx-xxxxx-xxx
+```
+
+なお、Account Idはdfx ledgerコマンドで確認できます。
