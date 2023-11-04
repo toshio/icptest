@@ -40,7 +40,7 @@ $ quill account-balance <Account id>
 Seed phraseからpemファイルを生成するコマンド
 
 ```bash
-$ quill --phrase '…' --pem-file <出力ファイル名.pem> generate
+$ quill generate --phrase '…' --pem-file <出力ファイル名.pem>
 ```
 
 引数で指定したSeed phraseから、seed.txtファイルと、`--pem-file`で指定した対応するpemファイルが出力されます。
