@@ -36,7 +36,8 @@
 
 ## ツール <a href="#tools" id="tools"></a>
 
-* [dfx](tools/dfx.md)
+* [dfx](tools/dfx/README.md)
+  * [dfx identity](tools/dfx/identity.md)
 * [quill](tools/quill.md)
 
 ## 参考情報 <a href="#reference" id="reference"></a>
