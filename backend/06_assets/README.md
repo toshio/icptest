@@ -4,11 +4,11 @@ Backend Canisterにstaticファイルを含めたい場合にどのようにす�
 
 FrontendのAsset Canisterでは、htmlファイルやjsファイル、pngファイルなどWebコンテンツに必要なファイルをCanisterへ格納できます。
 
-一方、Backend Canisterの場合は、以下のDfinityサンプルを見た限りでは、Canisterにファイルを直接配置するのではなく、Rustの[include_bytes!](https://doc.rust-lang.org/std/macro.include_bytes.html)マクロを使用してビルド時に静的ファイルを取り込んでいるようです。
+一方、Backend Canisterの場合は、以下のDfinityサンプルを見た限りでは、Canisterにファイルを直接配置するのではなく、Rustの[std::include_bytes!](https://doc.rust-lang.org/std/macro.include_bytes.html)マクロを使用してビルド時に静的ファイルを取り込んでいるようです。
 
 - [QR code generator on the Internet Computer](https://github.com/dfinity/examples/blob/master/rust/qrcode/src/qrcode_backend/src/lib.rs)
 
-『[1. Hello](../01_hello//README.md)』で解説したプログラムをベースに、応答文字列のうち「Hello」の部分を静的ファイルから読み込むようにしてみましょう。
+『[1. Hello](../01_hello//README.md)』で解説したプログラムをベースに、応答文字列のうち「Hello」の部分を静的ファイルから読み込むようにしてみましょう。この例では、ファイルから参照するデータは文字列ですので、[std::include_str!](https://doc.rust-lang.org/std/macro.include_str.html)マクロを使用することにします。
 
 ## 1. プロジェクトの作成
 
