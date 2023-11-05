@@ -15,6 +15,7 @@
   * [3. ic\_cdk::caller()](backend/03\_caller/README.md)
   * [4. ic\_cdk::call()](backend/04\_intercall/README.md)
   * [5. 動的画像生成](backend/05\_fractal/README.md)
+  * [6. staticファイル参照](backend/06\_static/README.md)
 * [Bootcamp](bootcamp/README.md)
   * [Calculator ➕✖️➖➗](bootcamp/day1/README.md)
   * [Homework diary 📔](bootcamp/day2/README.md)

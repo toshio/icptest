@@ -60,6 +60,7 @@ service : {
     "greet": (text) -> (text) query;
 }
 ```
+
 ### (3) [Cargo.toml](Cargo.toml)編集
 
 ```ini
@@ -104,7 +105,7 @@ fn greet(name: String) -> String {
 }
 ```
 
-## 2. ビルド
+## 3. ビルド
 
 DappをビルドしてローカルPC上にCanisterに配置する手順を以下に示します。
 
@@ -133,6 +134,7 @@ $ dfx canister create backend
 Canisterが一つも登録されていない状況から本コマンドを実行した場合、作成するCanisterのほかに、Wallet Canisterが作成されます。Internet ComputerではDappを実行させるためのCycleと呼ばれる燃料に相当するものが必要です。
 
 本番環境では ICPトークンをCycleに変換してDappを実行します。ローカル環境の場合には、コストはかかりませんが Cycle の仕組みがあり、作成されたWallet Canisterで管理されています。
+
 ### (3) ビルド
 
 Canisterに配備するwasmモジュールをビルドします。
