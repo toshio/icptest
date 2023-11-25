@@ -10,10 +10,11 @@
         "backend"
       ],
       "frontend": {
-        "entrypoint": "src/frontend/public/index.html"
+        "entrypoint": "src/frontend/src/index.html"
       },
       "source": [
-        "src/frontend/dist"
+        "src/frontend/assets",
+        "dist/frontend/"
       ],
       "type": "assets"
     }
@@ -24,5 +25,6 @@
       "packtool": ""
     }
   },
+  "output_env_file": ".env",
   "version": 1
 }
