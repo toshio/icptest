@@ -141,7 +141,17 @@ ic-cdk 0.12.0において、以下のように実装することで、HTTPS Outc
 
 ※IC環境上でこのサンプルが正しく動作するか未検証です。
 
-※2023/11/26時点で、Dfinityのドキュメント上は「TransformContext::new()」を使う方法が解説されていますが、コンパイルエラーが出たため、GitHub上の実装を参考に「[TransformContext::rom_name()](https://github.com/dfinity/cdk-rs/blob/83f45987f7bacfc2299a76caceea4d23edd147c0/src/ic-cdk/src/api/management_canister/http_request/types.rs#L52)」としています。
+※2023/11/26時点で、Dfinityのドキュメント上は「TransformContext::new()」を使う方法が解説されていますが、コンパイルエラーが出たため、GitHubを参考に「[TransformContext::rom_name()](https://github.com/dfinity/cdk-rs/blob/83f45987f7bacfc2299a76caceea4d23edd147c0/src/ic-cdk/src/api/management_canister/http_request/types.rs#L52)」を使用しています。
+
+※http_request()関数の第2引数に必要なCycleを指定するひつようがあります。  
+2023/11/26時点の[最新サンプル](https://github.com/dfinity/examples/blob/ebdbde6ae56ce15c74fa79dccc9133ca338fe1bb/rust/send_http_get/src/send_http_get_backend/src/lib.rs#L73)には以下のようなコメントが記載されているが、エラーが出ため、エラーメッセージ内で必要と言われた量よりも少し多めの仮値を入れておいた。  
+>//Note: in Rust, `http_request()` already sends the cycles needed
+>//so no need for explicit Cycles.add() as in Motoko
+>match http_request(request).await {
+
+
+
+
 
 ##### [src/lib.rs](src/lib.rs)
 
