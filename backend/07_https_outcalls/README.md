@@ -29,6 +29,7 @@ Deno.serve((req: Request) => {
       "message": `Hello, ${name}`,
       "timestamp": new Date()
   };
+  console.log(`User-Agent:${req.headers.get("user-agent") || ""}, name:${name}`)
 
   return new Response(
     JSON.stringify(data, null, 2), {
@@ -83,13 +84,18 @@ $ cd icptest
 
 ### (2) didファイルの作成
 
-『[1. Hello](../01_hello/README.md)』と同じbackend.didを用意します。
+『[1. Hello](../01_hello/README.md)』と同じようなbackend.didを用意します。
+
+ただし、greet()関数からHTTPS Outcallsを実行する場合には、Query CallではなくUpdate Callとする必要がありますので（※）、Candidの定義から「query」を取り除いておきましょう。
+
+※[IC0504エラー](https://wiki.internetcomputer.org/wiki/Error_Codes_returned_by_Internet_Computer)が出るようです。
+
 
 ###### [backend.did](backend.did)
 
 ```
 service : {
-    "greet": (text) -> (text) query;
+    "greet": (text) -> (text);
 }
 ```
 
@@ -120,3 +126,141 @@ candid = "0.10.0"
 ic-cdk = "0.12.0"
 urlencoding = "2.1.3"
 ```
+
+### (4) プログラム
+
+ic-cdk 0.12.0において、以下のように実装することで、HTTPS Outcallを実行することができます。
+
+ローカル環境で動作確認する場合は配備先ノードが1台ですが、IC上では複数ノードに配備されてノードごとにHTTP Outcallが実行されることになります。
+
+複数ノードから同時にHTTPS Outcallが実行される場合、HTTPS応答のコンセンサスを得る必要がありますが、今回用意したテストサーバのように、リクエストごとにJSONデータの一部内容が変わるような場合には、[TransformContext](https://docs.rs/ic-cdk/latest/ic_cdk/api/management_canister/http_request/struct.TransformContext.html)という仕組みでHTTP応答を加工することでコンセンサスを得られるようにします。
+
+今回のサンプルでは、transform()関数の中でserde_jsonモジュールを利用して`{"name":..., "timestamp":...}`の応答を`{"name":...}`に加工しています。
+
+※IC環境上でこのサンプルが正しく動作するか未検証です。
+
+※2023/11/26時点で、Dfinityのドキュメント上は「TransformContext::new()」を使う方法が解説されていますが、コンパイルエラーが出たため、GitHub上の実装を参考に「[TransformContext::rom_name()](https://github.com/dfinity/cdk-rs/blob/83f45987f7bacfc2299a76caceea4d23edd147c0/src/ic-cdk/src/api/management_canister/http_request/types.rs#L52)」としています。
+
+##### [src/lib.rs](src/lib.rs)
+
+```rust
+use ic_cdk::{update, query};
+use ic_cdk::api::management_canister::http_request::{
+  http_request, CanisterHttpRequestArgument, HttpHeader, HttpMethod, HttpResponse, TransformArgs,
+  TransformContext,
+};
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Serialize, Deserialize)]
+struct ResponseJson {
+  message: String,
+  // no timestamp for ic consensus
+}
+
+#[update]
+async fn greet(name: String) -> String {
+  let host = "jsontest.deno.dev";
+  let url = format!("https://{}/?name={}", host, urlencoding::encode(&name));
+
+  let request_headers = vec![
+    HttpHeader {
+      name: "Host".to_string(),
+      value: format!("{host}:443"),
+    },
+  ];
+
+  // Used by CanisterHttpRequestArgument.transform
+  let context = ResponseJson {
+    message: "test".to_string(),
+  };
+
+  //note "CanisterHttpRequestArgument" and "HttpMethod" are declared in line 4
+  let request = CanisterHttpRequestArgument {
+    url: url.to_string(),
+    method: HttpMethod::GET,
+    body: None,
+    max_response_bytes: Some(1000),
+    transform: Some(TransformContext::from_name("transform".to_string(), serde_json::to_vec(&context).unwrap())),
+    headers: request_headers,
+  };
+  
+  let cycle = 4_000_000u128; // FIXME 
+  match http_request(request, cycle).await {  
+    Ok((response,)) => {
+      let obj: ResponseJson = serde_json::from_slice(&response.body).unwrap();
+      obj.message
+    }
+    Err((_, m)) => {  
+      m
+    }
+  }
+}
+
+#[query]
+fn transform(raw: TransformArgs) -> HttpResponse {
+  let headers = vec![
+    HttpHeader {
+        name: "Content-Security-Policy".to_string(),
+        value: "default-src 'self'".to_string(),
+    },
+    HttpHeader {
+        name: "Referrer-Policy".to_string(),
+        value: "strict-origin".to_string(),
+    },
+    HttpHeader {
+        name: "Permissions-Policy".to_string(),
+        value: "geolocation=(self)".to_string(),
+    },
+    HttpHeader {
+        name: "Strict-Transport-Security".to_string(),
+        value: "max-age=63072000".to_string(),
+    },
+    HttpHeader {
+        name: "X-Frame-Options".to_string(),
+        value: "DENY".to_string(),
+    },
+    HttpHeader {
+        name: "X-Content-Type-Options".to_string(),
+        value: "nosniff".to_string(),
+    },
+  ];
+
+  let mut res = HttpResponse {
+    status: raw.response.status.clone(),
+    body: raw.response.body.clone(),
+    headers,
+    ..Default::default()
+  };
+
+  if res.status == 200 as u128 {
+      let obj: ResponseJson = serde_json::from_slice(&raw.response.body).unwrap();
+      res.body = serde_json::to_vec(&obj).unwrap();
+  } else {
+      ic_cdk::api::print(format!("Received an error from coinbase: err = {:?}", raw));
+  }
+  res
+}
+```
+
+## 3. Canister起動 & ビルド
+
+```bash
+$ dfx start --background --clean
+$ dfx deploy
+```
+
+## 4. 実行
+
+### (1) Candid UI
+
+名前を指定して [CALL] (Update call)を呼び出すと、『Hello, <名前>』の応答が返ってくることが確認できます。
+
+![](../../.gitbook/assets/backend/07_https_outcalls/outcall01.png)
+
+### (2) 外部Webサーバ
+
+外部Webサーバ上でロギングした内容を見るとリクエストが到達していることを確認できます。
+
+ローカルPC上のCanisterからですので1リクエストしか確認できません。
+
+![](../../.gitbook/assets/backend/07_https_outcalls/outcall02.png)
