@@ -107,7 +107,7 @@ service : {
 
 ```bash
 $ cargo add candid ic-cdk
-$ carg add urlencoding
+$ cargo add urlencoding
 $ cargo add serde --no-default-features --features derive
 $ cargo add serde_json
 ```
