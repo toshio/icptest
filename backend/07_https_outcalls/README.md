@@ -103,7 +103,7 @@ service : {
 
 『[1. Hello](../01_hello//README.md)』と同じように、libセクションに`crate-type = ["cdylib"]`を追記して、依存ライブラリを追加します。
 
-今回は`candid`, `ic-cdk`にくわえ、URLエンコードのために`urlencoding`も入れておきます。
+今回は`candid`, `ic-cdk`に加え、URLエンコードのために`urlencoding`、JSON処理用に`serde`と`serde_json`を入れておきます。
 
 ```bash
 $ cargo add candid ic-cdk
