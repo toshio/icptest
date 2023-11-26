@@ -124,6 +124,8 @@ crate-type = ["cdylib"]
 [dependencies]
 candid = "0.10.0"
 ic-cdk = "0.12.0"
+serde = { version = "1.0.193", default-features = false, features = ["derive"] }
+serde_json = "1.0.108"
 urlencoding = "2.1.3"
 ```
 
