@@ -1,0 +1,8 @@
+type ResultBlob = variant { Ok: blob; Err: text };
+type ResultText = variant { Ok: text; Err: text };
+
+service : {
+    "get_xrp_address_from_ecdsa_public_key": (blob) -> (text) query;
+    "get_public_key": () -> (ResultBlob);
+    "get_xrp_address": () -> (ResultText);
+}

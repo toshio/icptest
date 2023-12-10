@@ -17,6 +17,7 @@
   * [5. 動的画像生成](backend/05\_fractal/README.md)
   * [6. staticファイル参照](backend/06\_assets/README.md)
   * [7. HTTPS outcalls](backend/07\_https_outcalls/README.md)
+  * [8. Threshold ECDSA](backend/08_threshold_ecdsa/README.md)
 * [Bootcamp](bootcamp/README.md)
   * [Calculator ➕✖️➖➗](bootcamp/day1/README.md)
   * [Homework diary 📔](bootcamp/day2/README.md)
