@@ -2,41 +2,90 @@
 
 まずはじめに、最もシンプルなHelloを返すDappsを開発してみます。
 
+`dfx new`コマンドを実行して自動生成されるもので、以下の2つのCanisterで構成されます。
+
+- Backend Canister
+- Frontend Canister
+
 ## プロジェクト作成
 
-以下のように`dfx new`コマンドを使うことで、Rust用のサンプルアプリケーションを自動生成することができます。
+`dfx new`コマンドをコマンドを実行すると、Backend開発に使用するプログラミング言語やFrontendのフレームワークなどを対話形式で訊かれた後、サンプルアプリケーションが自動生成されます。
 
-『icptest』はプロジェクト名ですので、適宜変更しても構いません。
+『hello』はプロジェクト名ですので、適宜変更しても構いません。
 
 ```bash
-$ dfx new --type=rust icptest
-$ cd icptest/
+$ dfx new hello
 ```
 
-##### 補足
+##### Backendのプログラミング言語の選択
 
-以下の記事より、`dfx new`コマンドは、v0.15.1で大幅なアップデートがある予定で、Motoko、Rust以外に、Azle (JavaScript)やKybra (Python)も利用できるようになるとのことです。また、FrontendのテンプレートもReact、Vue、Unit Testの有無、Internet Identityなども選べるようになるようですので、リリースされ次第記事を更新します。
+```bash
+$ dfx new hello
+? Select a backend language: ›  
+  Motoko
+❯ Rust
+  TypeScript (Azle)
+  Python (Kybra)
+```
 
-https://internetcomputer.org/blog/2023/09/01/news-and-updates/update
+##### Frontend frameworkの選択
 
->The dfx new command has some exciting updates and improvements that will be coming out in dfx release 0.15.1. One of the biggest changes is that there will be an interactive prompt that will allow you to choose what language template you'd like to create a new project using. Previously, this decision was made using the flag --type=motoko or --type=rust. Additionally, there will be additional options through this new interactive prompt, such as Azle and Kybra.
+```bash
+? Select a frontend framework: ›  
+❯ SvelteKit
+  React
+  Vue
+  Vanilla JS
+  No JS template
+  No frontend canister
+```
 
->In this interactive prompt, there are also options to enable add-ons, such as adding a frontend canister using different frontend templates like React or Vue, enabling unit tests, or adding integrations like Internet Identity and Bitcoin.
+##### Extra featuresの選択
 
+```bash
+? Add extra features (space to select, enter to confirm) ›
+⬚ Internet Identity
+⬚ Bitcoin (Regtest)
+```
 
-## ローカル環境でのCanister起動
+### ディレクトリ構成
+
+```bash
+hello
+├── .git
+│    ︙
+├── .gitignore
+├── Cargo.lock
+├── Cargo.toml
+├── README.md
+├── dfx.json
+├── node_modules
+│    ︙
+├── package-lock.json
+├── package.json
+├── src
+│   ├── hello_backend
+│   │    ︙
+│   └── hello_frontend
+│        ︙
+└── tsconfig.json
+```
+
+## Local Canister実行環境の起動
 
 Dapps開発時は本番環境に配備する必要はなく、ローカルPC内に配備します。
 
-`dfx start`コマンドで、ローカルPC環境で動作するCanisterを起動します。サービスを起動した後にコマンドラインを復帰させたい場合「--background」オプションを付与するとよいでしょう。
+`dfx start`コマンドで、Local Canister実行環境を起動します。サービスを起動した後にコマンドラインを復帰させたい場合「--background」オプションを付与するとよいでしょう。
 
 「--clean」はサービス起動時にCanisterを初期化するためのオプションです。
 
 ```bash
+$ cd hello
 $ dfx start --clean --background
-Running dfx start for version 0.13.1
+Running dfx start for version 0.19.0
 Using the default definition for the 'local' shared network because /home/toshio/.config/dfx/networks.json does not exist.
-Dashboard: http://localhost:38281/_/dashboard
+Initialized replica.
+Dashboard: http://localhost:37463/_/dashboard
 ```
 
 ## ローカル環境へのDeploy
@@ -47,10 +96,14 @@ $ dfx deploy
 Deployed canisters.
 URLs:
   Frontend canister via browser
-    icptest_frontend: http://127.0.0.1:8000/?canisterId=ryjl3-tyaaa-aaaaa-aaaba-cai
+    hello_frontend:
+      - http://127.0.0.1:4943/?canisterId=bd3sg-teaaa-aaaaa-qaaba-cai
+      - http://bd3sg-teaaa-aaaaa-qaaba-cai.localhost:4943/
   Backend canister via Candid interface:
-    icptest_backend: http://127.0.0.1:8000/?canisterId=r7inp-6aaaa-aaaaa-aaabq-cai&id=rrkah-fqaaa-aaaaa-aaaaq-cai
+    hello_backend: http://127.0.0.1:4943/?canisterId=be2us-64aaa-aaaaa-qaabq-cai&id=bkyz2-fmaaa-aaaaa-qaaaq-cai
 ```
+
+※Canister IDは環境によって変わります。
 
 ## 実行
 
@@ -78,30 +131,28 @@ Webブラウザーでそれぞれアクセスしてみましょう。
 - Cargo.toml
 - lib.rs
 
-`dfx new`コマンドには、『--no-frontend』オプションがあってBackendのみ生成もできそうなのですが、執筆時点で最新のV0.13.1ではFrontendも同時に出力されてしまうようです。
-
 ###### dfx.json
 
 ```json
 {
   "canisters": {
-    "icptest_backend": {
-      "candid": "src/icptest_backend/icptest_backend.did",
-      "package": "icptest_backend",
+    "hello_backend": {
+      "candid": "src/hello_backend/hello_backend.did",
+      "declarations": {
+        "node_compatibility": true
+      },
+      "package": "hello_backend",
       "type": "rust"
     },
-    "icptest_frontend": {
+    "hello_frontend": {
       "dependencies": [
-        "icptest_backend"
+        "hello_backend"
       ],
-      "frontend": {
-        "entrypoint": "src/icptest_frontend/src/index.html"
-      },
       "source": [
-        "src/icptest_frontend/assets",
-        "dist/icptest_frontend/"
+        "src/hello_frontend/dist"
       ],
-      "type": "assets"
+      "type": "assets",
+      "workspace": "hello_frontend"
     }
   },
   "defaults": {
@@ -115,7 +166,7 @@ Webブラウザーでそれぞれアクセスしてみましょう。
 }
 ```
 
-###### src/icptest_backend/icptest_backend.did
+###### src/hello_backend/hello_backend.did
 
 開発したアプリケーションは外部からどのように呼ばれるか、I/Fを規定します。
 
@@ -125,11 +176,11 @@ service : {
 }
 ```
 
-##### src/icptest_backend/Cargo.toml
+##### src/hello_backend/Cargo.toml
 
 ```ini
 [package]
-name = "icptest_backend"
+name = "hello_backend"
 version = "0.1.0"
 edition = "2021"
 
@@ -139,15 +190,15 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-candid = "0.8.2"
-ic-cdk = "0.6.0"
-ic-cdk-macros = "0.6.0"
+candid = "0.10"
+ic-cdk = "0.13"
+ic-cdk-timers = "0.7" # Feel free to remove this dependency if you don't need timers
 ```
 
-###### src/icptest_backend/src/lib.rs
+###### src/hello_backend/src/lib.rs
 
 ```rust
-#[ic_cdk_macros::query]
+#[ic_cdk::query]
 fn greet(name: String) -> String {
     format!("Hello, {}!", name)
 }
