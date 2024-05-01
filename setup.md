@@ -2,7 +2,9 @@
 
 Internet ComputerのCanister上で動作するDappsを開発するための環境を準備します。
 
-Internet Computerでは、Dappsの開発言語としてMotoko、Rust、JavaScriptなどいくつかありますが、このドキュメントではRust言語を使って開発する前提で進めていきます。
+Internet Computerでは、Dappsの開発言語としてMotoko、Rust、JavaScript/TypeScript、Pythonなどいくつかありますが、このドキュメントではRust言語を使って開発する前提で進めていきます。
+
+手順はWSL (Windows Subsystem for Linux)上のUbuntu 24.04 LTSを想定したものですので、ご使用の環境によって違いがある場合は適宜読み替えてください。
 
 ## 1. SDKインストール
 
@@ -21,7 +23,6 @@ $ sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
 
 Rust言語は、[Rust公式サイト](https://www.rust-lang.org/tools/install)を参考にインストールするとよいでしょう。
 
-筆者はWSL (Windows Subsystem for Linux)上のUbuntu 22.04を使用しており、以下のコマンドでインストールできました。
 
 ```bash
 $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -33,7 +34,7 @@ rustcコマンドが通っていればOKです。
 
 ```bash
 $ rustc --version
-rustc 1.70.0 (90c541806 2023-05-31)
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
 ```
 
 ### wasm
@@ -42,14 +43,14 @@ rustc 1.70.0 (90c541806 2023-05-31)
 $ rustup target add wasm32-unknown-unknown
 ```
 
-## 3. cmakeインストール
+## 3. build-essentialインストール
 
-Rust CDKではcmakeが必要になるのでインストールしておきます。
+ビルドの際にcmake等が必要となるので、`build-essential`をインストールしておきます。
 
 ```bash
-$ sudo apt install cmake
+$ sudo apt install build-essential
 ```
 
 ## 4. エディタ
 
-Visual Stuido Codeなどを利用すると便利かもしれません。
+Visual Studio Codeなどを利用すると便利かもしれません。
